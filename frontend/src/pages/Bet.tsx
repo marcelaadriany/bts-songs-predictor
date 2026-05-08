@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 
 import SongOption from "../components/SongCheckbox";
 import type { Song } from "../types/Song";
@@ -48,30 +49,33 @@ export default function Bet() {
   }
 
   return (
-    <div style={styles.container}>
-      <h1>🎯 Make Your Bet</h1>
+    <>
+      <Navbar />
+      <div style={styles.container}>
+        <h1>🎯 Make Your Bet</h1>
 
-      <p>Select 2 songs you think will be played next.</p>
+        <p>Select 2 songs you think will be played next.</p>
 
-      <div style={styles.list}>
-        {availableSongs.map((song) => (
-          <SongOption
-            key={song.id}
-            song={song}
-            selected={selectedSongs.includes(song.id)}
-            onSelect={handleSelect}
-          />
-        ))}
+        <div style={styles.list}>
+          {availableSongs.map((song) => (
+            <SongOption
+              key={song.id}
+              song={song}
+              selected={selectedSongs.includes(song.id)}
+              onSelect={handleSelect}
+            />
+          ))}
+        </div>
+
+        <div style={styles.footer}>
+          <p>Selected: {selectedSongs.length} / 2</p>
+
+          <button style={styles.button} onClick={handleSubmitBet}>
+            Submit Bet
+          </button>
+        </div>
       </div>
-
-      <div style={styles.footer}>
-        <p>Selected: {selectedSongs.length} / 2</p>
-
-        <button style={styles.button} onClick={handleSubmitBet}>
-          Submit Bet
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

@@ -1,16 +1,21 @@
 import { albums } from "../data/songs";
+import Navbar from "../components/Navbar";
 
 import AlbumSection from "../components/AlbumSection";
 
 export default function Home() {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>BTS Surprise Songs</h1>
+    <div>
+      <Navbar />
 
-      <div style={styles.grid}>
-        {albums.map((album) => (
-          <AlbumSection key={album.id} album={album} />
-        ))}
+      <div style={styles.container}>
+        <h1 style={styles.title}>BTS Surprise Songs</h1>
+
+        <div style={styles.grid}>
+          {albums.map((album) => (
+            <AlbumSection key={album.id} album={album} />
+          ))}
+        </div>
       </div>
     </div>
   );
