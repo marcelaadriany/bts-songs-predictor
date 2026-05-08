@@ -1,21 +1,11 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 
-import SongOption from "../components/SongCheckbox";
-import type { Song } from "../types/Song";
+import Navbar from "../components/Navbar";
+import AlbumSection from "../components/AlbumSection";
+
+import { albums } from "../data/songs";
 
 export default function Bet() {
-  const songs: Song[] = [
-    { id: 1, name: "Dynamite", played: true },
-    { id: 2, name: "Butter", played: true },
-    { id: 3, name: "Spring Day", played: false },
-    { id: 4, name: "Fake Love", played: false },
-    { id: 5, name: "Black Swan", played: false },
-    { id: 6, name: "Run BTS", played: false },
-  ];
-
-  const availableSongs = songs.filter((song) => !song.played);
-
   const [selectedSongs, setSelectedSongs] = useState<number[]>([]);
 
   function handleSelect(songId: number) {
@@ -24,12 +14,14 @@ export default function Bet() {
     // remove seleção
     if (alreadySelected) {
       setSelectedSongs(selectedSongs.filter((id) => id !== songId));
+
       return;
     }
 
-    // impede mais de 2
+    // limita a 2 músicas
     if (selectedSongs.length >= 2) {
       alert("You can only select 2 songs");
+
       return;
     }
 
@@ -40,36 +32,41 @@ export default function Bet() {
   function handleSubmitBet() {
     if (selectedSongs.length !== 2) {
       alert("Select exactly 2 songs");
+
       return;
     }
 
-    console.log("Bet submitted:", selectedSongs);
+    console.log(selectedSongs);
 
-    alert("Bet submitted successfully!");
+    alert("Bet submitted!");
   }
 
   return (
     <>
       <Navbar />
+
       <div style={styles.container}>
-        <h1>🎯 Make Your Bet</h1>
+        <h1 style={styles.title}>🎯 Make Your Bet</h1>
 
-        <p>Select 2 songs you think will be played next.</p>
+        <p style={styles.subtitle}>
+          Select 2 songs you think will be played next.
+        </p>
 
-        <div style={styles.list}>
-          {availableSongs.map((song) => (
-            <SongOption
-              key={song.id}
-              song={song}
-              selected={selectedSongs.includes(song.id)}
+        <div style={styles.counter}>Selected: {selectedSongs.length} / 2</div>
+
+        <div style={styles.grid}>
+          {albums.map((album) => (
+            <AlbumSection
+              key={album.id}
+              album={album}
+              clickable
+              selectedSongs={selectedSongs}
               onSelect={handleSelect}
             />
           ))}
         </div>
 
         <div style={styles.footer}>
-          <p>Selected: {selectedSongs.length} / 2</p>
-
           <button style={styles.button} onClick={handleSubmitBet}>
             Submit Bet
           </button>
@@ -81,32 +78,46 @@ export default function Bet() {
 
 const styles = {
   container: {
-    maxWidth: "600px",
-    margin: "0 auto",
     padding: "20px",
     fontFamily: "Arial",
   },
 
-  list: {
-    display: "flex",
-    flexDirection: "column" as const,
-    gap: "10px",
-    marginTop: "20px",
+  title: {
+    textAlign: "center" as const,
+    marginBottom: "8px",
+  },
+
+  subtitle: {
+    textAlign: "center" as const,
+    color: "#666",
+    marginBottom: "24px",
+  },
+
+  counter: {
+    textAlign: "center" as const,
+    marginBottom: "32px",
+    fontWeight: "bold",
+  },
+
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "24px",
   },
 
   footer: {
-    marginTop: "30px",
+    marginTop: "40px",
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "center",
   },
 
   button: {
-    padding: "10px 16px",
+    padding: "12px 24px",
     border: "none",
-    backgroundColor: "#4f46e5",
-    color: "#fff",
     borderRadius: "8px",
+    backgroundColor: "#ec4899",
+    color: "white",
     cursor: "pointer",
+    fontWeight: "bold",
   },
 };
