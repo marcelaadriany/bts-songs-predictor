@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import SongOption from "../components/SongOption";
+import SongOption from "../components/SongCheckbox";
 import type { Song } from "../types/Song";
 
 export default function Bet() {
