@@ -6,7 +6,11 @@ import AlbumSection from "../components/AlbumSection";
 import { albums } from "../data/songs";
 
 export default function Bet() {
-  const [selectedSongs, setSelectedSongs] = useState<number[]>([]);
+  const [selectedSongs, setSelectedSongs] = useState<number[]>(() => {
+    const savedBet = localStorage.getItem("bet");
+
+    return savedBet ? JSON.parse(savedBet) : [];
+  });
 
   function handleSelect(songId: number) {
     const alreadySelected = selectedSongs.includes(songId);
@@ -35,6 +39,8 @@ export default function Bet() {
 
       return;
     }
+
+    localStorage.setItem("bet", JSON.stringify(selectedSongs));
 
     console.log(selectedSongs);
 

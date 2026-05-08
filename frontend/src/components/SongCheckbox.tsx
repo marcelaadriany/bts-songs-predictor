@@ -24,10 +24,7 @@ export default function SongCheckbox({
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        cursor:
-          clickable && !song.played
-            ? "pointer"
-            : "default",
+        cursor: clickable && !song.played ? "pointer" : "default",
         opacity: song.played ? 0.5 : 1,
         marginBottom: "8px",
       }}
@@ -37,17 +34,14 @@ export default function SongCheckbox({
           width: "18px",
           height: "18px",
           border: "2px solid black",
-          backgroundColor: selected
-            ? "#ec4899"
-            : "transparent",
+          transition: "0.3s",
+          backgroundColor: selected ? "#ec4899" : "transparent",
         }}
       />
 
       <span
         style={{
-          textDecoration: song.played
-            ? "line-through"
-            : "none",
+          textDecoration: song.played ? "line-through" : "none",
         }}
       >
         {song.name}
