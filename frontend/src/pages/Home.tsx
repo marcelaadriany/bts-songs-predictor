@@ -1,13 +1,11 @@
 import { albums } from "../data/songs";
-import Navbar from "../components/Navbar";
 
 import AlbumSection from "../components/AlbumSection";
+import Layout from "../components/Layout";
 
 export default function Home() {
   return (
-    <div>
-      <Navbar />
-
+    <Layout>
       <div style={styles.container}>
         <h1 style={styles.title}>BTS Surprise Songs</h1>
 
@@ -17,7 +15,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 

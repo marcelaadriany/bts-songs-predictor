@@ -1,10 +1,9 @@
-import Navbar from "../components/Navbar";
+import Layout from "../components/Layout";
 
 export default function Login() {
   return (
-    <>
-      <Navbar />
+    <Layout>
       <h1>Login</h1>
-    </>
+    </Layout>
   );
 }

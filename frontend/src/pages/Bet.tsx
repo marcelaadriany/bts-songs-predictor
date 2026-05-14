@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import Navbar from "../components/Navbar";
+import Layout from "../components/Layout";
 import AlbumSection from "../components/AlbumSection";
 
 import { albums } from "../data/songs";
+import toast from "react-hot-toast";
 
 export default function Bet() {
   const [selectedSongs, setSelectedSongs] = useState<number[]>(() => {
@@ -24,7 +25,7 @@ export default function Bet() {
 
     // limita a 2 músicas
     if (selectedSongs.length >= 2) {
-      alert("You can only select 2 songs");
+      toast.error("You can only select 2 songs");
 
       return;
     }
@@ -35,7 +36,7 @@ export default function Bet() {
 
   function handleSubmitBet() {
     if (selectedSongs.length !== 2) {
-      alert("Select exactly 2 songs");
+      toast("Select exactly 2 songs");
 
       return;
     }
@@ -44,13 +45,11 @@ export default function Bet() {
 
     console.log(selectedSongs);
 
-    alert("Bet submitted!");
+    toast.success("Bet submitted!");
   }
 
   return (
-    <>
-      <Navbar />
-
+    <Layout>
       <div style={styles.container}>
         <h1 style={styles.title}>🎯 Make Your Bet</h1>
 
@@ -78,7 +77,7 @@ export default function Bet() {
           </button>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 
