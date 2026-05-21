@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3f721594-9852-4fd7-ae00-c6905acf8e43" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bts-songs-predictor/src/main/java/com/marcela/bts_songs_predictor/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bts-songs-predictor/src/main/java/com/marcela/bts_songs_predictor/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,7 @@
     "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/marcela/Documentos/projects/bts-songs-predictor/backend/bts-songs-predictor",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
