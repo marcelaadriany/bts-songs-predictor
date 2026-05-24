@@ -44,8 +44,8 @@ public class ConcertResultSeeder implements CommandLineRunner {
     addConcertResult("GOYANG, KR", LocalDate.of(2026, 4, 11), "DNA", "TAKE TWO");
     addConcertResult("GOYANG, KR", LocalDate.of(2026, 4, 12), "RUN", "SPRING DAY");
 
-    addConcertResult("TOKYO, JP", LocalDate.of(2026, 4, 17), "SAVE ME", "CRYSTAL SNOW");
-    addConcertResult("TOKYO, JP", LocalDate.of(2026, 4, 18), "DOPE", "FOR YOU");
+    addConcertResult("TÓQUIO, JP", LocalDate.of(2026, 4, 17), "SAVE ME", "CRYSTAL SNOW");
+    addConcertResult("TÓQUIO, JP", LocalDate.of(2026, 4, 18), "DOPE", "FOR YOU");
 
     addConcertResult("TAMPA, EUA", LocalDate.of(2026, 4, 25), "PERMISSION TO DANCE", "MAGIC SHOP");
     addConcertResult("TAMPA, EUA", LocalDate.of(2026, 4, 26), "PIED PIPER", "BOY WITH LUV");
@@ -61,6 +61,9 @@ public class ConcertResultSeeder implements CommandLineRunner {
     addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 16), "N.O", "ANPANMAN");
     addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 17), "DOPE", "BLOOD SWEAT & TEARS");
     addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 19), "I NEED U", "NO MORE DREAM");
+
+    addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 23), "PERMISSION TO DANCE", "GO GO");
+
   }
 
   private void addConcertResult(String concertName, LocalDate date, String firstSongTitle, String secondSongTitle) {
