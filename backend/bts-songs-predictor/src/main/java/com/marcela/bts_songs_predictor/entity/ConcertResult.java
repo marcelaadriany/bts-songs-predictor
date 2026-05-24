@@ -5,23 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name = "concerts")
+@Table(name = "concert_results")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Concert {
+public class ConcertResult {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String name;
+  @ManyToOne
+  @JoinColumn(name = "concert_id")
+  private Concert concert;
 
-  private LocalDate concertDate;
-
-  @Column(nullable = false)
-  private Boolean resultReleased = false;
+  @ManyToOne
+  @JoinColumn(name = "song_id")
+  private Song song;
 }

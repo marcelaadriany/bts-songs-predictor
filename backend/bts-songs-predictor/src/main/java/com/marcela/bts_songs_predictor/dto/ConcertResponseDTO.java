@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public record ConcertResponseDTO(
     Long id,
     String name,
-    LocalDate concertDate
+    LocalDate concertDate,
+    Boolean resultReleased
 ) {
 }

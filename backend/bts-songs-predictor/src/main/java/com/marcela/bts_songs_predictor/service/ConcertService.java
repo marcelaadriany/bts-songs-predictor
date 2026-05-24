@@ -38,7 +38,8 @@ public class ConcertService {
     return new ConcertResponseDTO(
         concert.getId(),
         concert.getName(),
-        concert.getConcertDate()
+        concert.getConcertDate(),
+        concert.getResultReleased()
     );
   }
 }
