@@ -63,6 +63,7 @@ public class ConcertResultSeeder implements CommandLineRunner {
     addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 19), "I NEED U", "NO MORE DREAM");
 
     addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 23), "PERMISSION TO DANCE", "GO GO");
+    addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 24), "BLACK SWAN", "SPINE BREAKER");
 
   }
 
