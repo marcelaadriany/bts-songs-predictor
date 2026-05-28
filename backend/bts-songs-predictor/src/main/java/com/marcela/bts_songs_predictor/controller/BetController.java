@@ -26,4 +26,17 @@ public class BetController {
   public List<BetResponseDTO> getBetsByConcert(@PathVariable Long concertId) {
     return betService.getBetsByConcert(concertId);
   }
+
+  @GetMapping("/me")
+  public List<BetResponseDTO> getMyBets() {
+    return betService.getMyBets();
+  }
+
+  @PutMapping("/{betId}")
+  public BetResponseDTO updateBet(
+      @PathVariable Long betId,
+      @RequestBody BetRequestDTO dto
+  ) {
+    return betService.updateBet(betId, dto);
+  }
 }

@@ -5,6 +5,7 @@ import com.marcela.bts_songs_predictor.dto.BetResponseDTO;
 import com.marcela.bts_songs_predictor.dto.SongResponseDTO;
 import com.marcela.bts_songs_predictor.entity.*;
 import com.marcela.bts_songs_predictor.repository.*;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -44,8 +45,10 @@ public class BetService {
 
     User user = getAuthenticatedUser();
 
-    Concert concert = concertRepository.findById(dto.concertId())
-        .orElseThrow(() -> new IllegalArgumentException("Show não encontrado."));
+    Concert concert = concertRepository
+        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
+            LocalDate.now())
+        .orElseThrow(() -> new IllegalArgumentException("Nenhum próximo show disponível para apostas."));
 
     if (Boolean.TRUE.equals(concert.getResultReleased())) {
       throw new IllegalArgumentException("Não é possível apostar em um show com resultado já liberado.");
@@ -82,6 +85,64 @@ public class BetService {
         .stream()
         .map(this::toResponseDTO)
         .toList();
+  }
+
+  public List<BetResponseDTO> getMyBets() {
+    User user = getAuthenticatedUser();
+
+    return betRepository.findByUserIdOrderByCreatedAtDesc(user.getId())
+        .stream()
+        .map(this::toResponseDTO)
+        .toList();
+  }
+
+  public BetResponseDTO updateBet(Long betId, BetRequestDTO dto) {
+    if (dto.songIds() == null || dto.songIds().size() != 6) {
+      throw new IllegalArgumentException("A aposta deve conter exatamente 6 músicas.");
+    }
+
+    User user = getAuthenticatedUser();
+
+    Bet bet = betRepository.findById(betId)
+        .orElseThrow(() -> new IllegalArgumentException("Aposta não encontrada."));
+
+    if (!bet.getUser().getId().equals(user.getId())) {
+      throw new IllegalArgumentException("Você não pode editar a aposta de outra usuária.");
+    }
+
+    Concert concert = bet.getConcert();
+
+    Concert nextConcert = concertRepository
+        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
+            LocalDate.now())
+        .orElseThrow(() -> new IllegalArgumentException("Nenhum próximo show disponível para apostas."));
+
+    if (!concert.getId().equals(nextConcert.getId())) {
+      throw new IllegalArgumentException("Só é possível editar apostas do próximo show.");
+    }
+
+    if (Boolean.TRUE.equals(concert.getResultReleased())) {
+      throw new IllegalArgumentException("Não é possível editar apostas após o resultado ser liberado.");
+    }
+
+    List<Song> songs = songRepository.findAllById(dto.songIds());
+
+    if (songs.size() != 6) {
+      throw new IllegalArgumentException("Uma ou mais músicas não foram encontradas.");
+    }
+
+    List<BetSong> existingBetSongs = betSongRepository.findByBetId(bet.getId());
+
+    betSongRepository.deleteAll(existingBetSongs);
+
+    songs.forEach(song -> {
+      BetSong betSong = new BetSong();
+      betSong.setBet(bet);
+      betSong.setSong(song);
+      betSongRepository.save(betSong);
+    });
+
+    return toResponseDTO(bet);
   }
 
   private BetResponseDTO toResponseDTO(Bet bet) {

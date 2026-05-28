@@ -10,4 +10,6 @@ public interface BetRepository extends JpaRepository<Bet, Long> {
   List<Bet> findByConcertId(Long concertId);
 
   boolean existsByUserIdAndConcertId(Long userId, Long concertId);
+
+  List<Bet> findByUserIdOrderByCreatedAtDesc(Long userId);
 }
