@@ -38,4 +38,9 @@ public class ConcertController {
   public List<WinnerResponseDTO> getWinnersByConcert(@PathVariable Long concertId) {
     return winnerService.getWinnersByConcert(concertId);
   }
+
+  @GetMapping("/next")
+  public ConcertResponseDTO getNextConcert() {
+    return concertService.getNextConcert();
+  }
 }

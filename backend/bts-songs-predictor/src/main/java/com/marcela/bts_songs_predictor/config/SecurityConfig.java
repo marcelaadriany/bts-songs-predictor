@@ -28,11 +28,13 @@ public class SecurityConfig {
         )
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(
-                "/auth/**",
+                "/auth/register",
+                "/auth/login",
                 "/songs/**",
                 "/concerts/**",
                 "/ranking"
             ).permitAll()
+            .requestMatchers("/auth/me").authenticated()
             .requestMatchers("/bets/**").authenticated()
             .anyRequest().authenticated()
         )

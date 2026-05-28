@@ -7,6 +7,7 @@ import com.marcela.bts_songs_predictor.dto.UserResponseDTO;
 import com.marcela.bts_songs_predictor.entity.User;
 import com.marcela.bts_songs_predictor.repository.UserRepository;
 import com.marcela.bts_songs_predictor.security.TokenService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,19 @@ public class AuthService {
     String token = tokenService.generateToken(user);
 
     return new AuthResponseDTO(token);
+  }
+
+  public UserResponseDTO getAuthenticatedUser() {
+    User user = (User) SecurityContextHolder
+        .getContext()
+        .getAuthentication()
+        .getPrincipal();
+
+    return new UserResponseDTO(
+        user.getId(),
+        user.getDisplayUsername(),
+        user.getEmail(),
+        user.getScore()
+    );
   }
 }

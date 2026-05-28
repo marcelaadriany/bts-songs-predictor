@@ -4,6 +4,7 @@ import com.marcela.bts_songs_predictor.dto.ConcertRequestDTO;
 import com.marcela.bts_songs_predictor.dto.ConcertResponseDTO;
 import com.marcela.bts_songs_predictor.entity.Concert;
 import com.marcela.bts_songs_predictor.repository.ConcertRepository;
+import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,6 +33,19 @@ public class ConcertService {
         .stream()
         .map(this::toResponseDTO)
         .toList();
+  }
+
+  public ConcertResponseDTO getNextConcert() {
+
+    Concert concert = concertRepository
+        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
+            LocalDate.now()
+        )
+        .orElseThrow(() ->
+            new IllegalArgumentException("Nenhum próximo show encontrado.")
+        );
+
+    return toResponseDTO(concert);
   }
 
   private ConcertResponseDTO toResponseDTO(Concert concert) {

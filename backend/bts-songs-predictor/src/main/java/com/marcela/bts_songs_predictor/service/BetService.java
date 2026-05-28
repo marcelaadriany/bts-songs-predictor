@@ -21,7 +21,6 @@ public class BetService {
   public BetService(
       BetRepository betRepository,
       BetSongRepository betSongRepository,
-      UserRepository userRepository,
       ConcertRepository concertRepository,
       SongRepository songRepository
   ) {
@@ -39,8 +38,8 @@ public class BetService {
   }
 
   public BetResponseDTO createBet(BetRequestDTO dto) {
-    if (dto.songIds() == null || dto.songIds().size() != 2) {
-      throw new IllegalArgumentException("A aposta deve conter exatamente 2 músicas.");
+    if (dto.songIds() == null || dto.songIds().size() != 6) {
+      throw new IllegalArgumentException("A aposta deve conter exatamente 6 músicas.");
     }
 
     User user = getAuthenticatedUser();
@@ -48,9 +47,17 @@ public class BetService {
     Concert concert = concertRepository.findById(dto.concertId())
         .orElseThrow(() -> new IllegalArgumentException("Show não encontrado."));
 
+    if (Boolean.TRUE.equals(concert.getResultReleased())) {
+      throw new IllegalArgumentException("Não é possível apostar em um show com resultado já liberado.");
+    }
+
+    if (betRepository.existsByUserIdAndConcertId(user.getId(), concert.getId())) {
+      throw new IllegalArgumentException("Você já fez uma aposta para este show.");
+    }
+
     List<Song> songs = songRepository.findAllById(dto.songIds());
 
-    if (songs.size() != 2) {
+    if (songs.size() != 6) {
       throw new IllegalArgumentException("Uma ou mais músicas não foram encontradas.");
     }
 
