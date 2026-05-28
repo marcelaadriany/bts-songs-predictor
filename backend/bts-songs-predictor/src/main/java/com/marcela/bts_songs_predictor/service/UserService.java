@@ -40,7 +40,7 @@ public class UserService {
   private UserResponseDTO toResponseDTO(User user) {
     return new UserResponseDTO(
         user.getId(),
-        user.getUsername(),
+        user.getDisplayUsername(),
         user.getEmail(),
         user.getScore()
     );
