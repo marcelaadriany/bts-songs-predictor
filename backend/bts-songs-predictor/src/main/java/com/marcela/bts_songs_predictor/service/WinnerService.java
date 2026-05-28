@@ -58,7 +58,7 @@ public class WinnerService {
 
     return new WinnerResponseDTO(
         bet.getUser().getId(),
-        bet.getUser().getUsername(),
+        bet.getUser().getDisplayUsername(),
         matchedSongs.size(),
         matchedSongs
     );
