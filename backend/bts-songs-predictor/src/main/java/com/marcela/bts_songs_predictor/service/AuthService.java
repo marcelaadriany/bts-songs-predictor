@@ -7,8 +7,6 @@ import com.marcela.bts_songs_predictor.dto.UserResponseDTO;
 import com.marcela.bts_songs_predictor.entity.User;
 import com.marcela.bts_songs_predictor.repository.UserRepository;
 import com.marcela.bts_songs_predictor.security.TokenService;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +15,15 @@ public class AuthService {
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
-  private final AuthenticationManager authenticationManager;
   private final TokenService tokenService;
 
   public AuthService(
       UserRepository userRepository,
       PasswordEncoder passwordEncoder,
-      AuthenticationManager authenticationManager,
       TokenService tokenService
   ) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
-    this.authenticationManager = authenticationManager;
     this.tokenService = tokenService;
   }
 
@@ -50,14 +45,17 @@ public class AuthService {
   }
 
   public AuthResponseDTO login(LoginRequestDTO dto) {
-    var authenticationToken = new UsernamePasswordAuthenticationToken(
-        dto.email(),
-        dto.password()
+    User user = userRepository.findByEmail(dto.email())
+        .orElseThrow(() -> new IllegalArgumentException("Email ou senha inválidos."));
+
+    boolean passwordMatches = passwordEncoder.matches(
+        dto.password(),
+        user.getPassword()
     );
 
-    var authentication = authenticationManager.authenticate(authenticationToken);
-
-    var user = (User) authentication.getPrincipal();
+    if (!passwordMatches) {
+      throw new IllegalArgumentException("Email ou senha inválidos.");
+    }
 
     String token = tokenService.generateToken(user);
 

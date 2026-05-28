@@ -1,6 +1,7 @@
 package com.marcela.bts_songs_predictor.security;
 
 import com.marcela.bts_songs_predictor.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,15 @@ public class TokenService {
         .expiration(Date.from(Instant.now().plusSeconds(86400)))
         .signWith(getSigningKey())
         .compact();
+  }
+
+  public String validateTokenAndGetSubject(String token) {
+    Claims claims = Jwts.parser()
+        .verifyWith(getSigningKey())
+        .build()
+        .parseSignedClaims(token)
+        .getPayload();
+
+    return claims.getSubject();
   }
 }

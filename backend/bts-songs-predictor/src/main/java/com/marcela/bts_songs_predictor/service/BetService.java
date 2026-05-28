@@ -6,6 +6,7 @@ import com.marcela.bts_songs_predictor.dto.SongResponseDTO;
 import com.marcela.bts_songs_predictor.entity.*;
 import com.marcela.bts_songs_predictor.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ public class BetService {
 
   private final BetRepository betRepository;
   private final BetSongRepository betSongRepository;
-  private final UserRepository userRepository;
   private final ConcertRepository concertRepository;
   private final SongRepository songRepository;
 
@@ -27,9 +27,15 @@ public class BetService {
   ) {
     this.betRepository = betRepository;
     this.betSongRepository = betSongRepository;
-    this.userRepository = userRepository;
     this.concertRepository = concertRepository;
     this.songRepository = songRepository;
+  }
+
+  private User getAuthenticatedUser() {
+    return (User) SecurityContextHolder
+        .getContext()
+        .getAuthentication()
+        .getPrincipal();
   }
 
   public BetResponseDTO createBet(BetRequestDTO dto) {
@@ -37,8 +43,7 @@ public class BetService {
       throw new IllegalArgumentException("A aposta deve conter exatamente 2 músicas.");
     }
 
-    User user = userRepository.findById(dto.userId())
-        .orElseThrow(() -> new IllegalArgumentException("Usuária não encontrada."));
+    User user = getAuthenticatedUser();
 
     Concert concert = concertRepository.findById(dto.concertId())
         .orElseThrow(() -> new IllegalArgumentException("Show não encontrado."));
