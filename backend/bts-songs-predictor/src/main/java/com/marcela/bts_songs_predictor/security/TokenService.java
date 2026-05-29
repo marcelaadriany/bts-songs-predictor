@@ -4,6 +4,7 @@ import com.marcela.bts_songs_predictor.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -14,10 +15,11 @@ import java.util.Date;
 @Service
 public class TokenService {
 
-  private static final String SECRET = "minha-chave-secreta-super-segura-para-jwt-do-projeto-bts";
+  @Value("${api.security.token.secret}")
+  private String secret;
 
   private SecretKey getSigningKey() {
-    return Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+    return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
   }
 
   public String generateToken(User user) {
