@@ -27,4 +27,8 @@ public class AuthController {
     return authService.login(dto);
   }
 
+  @GetMapping("/me")
+  public UserResponseDTO getAuthenticatedUser() {
+    return authService.getAuthenticatedUser();
+  }
 }

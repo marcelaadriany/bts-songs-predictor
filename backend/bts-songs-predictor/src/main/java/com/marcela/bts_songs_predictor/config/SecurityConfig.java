@@ -22,17 +22,20 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
+        .cors(cors -> {})
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session ->
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(
-                "/auth/**",
+                "/auth/register",
+                "/auth/login",
                 "/songs/**",
                 "/concerts/**",
                 "/ranking"
             ).permitAll()
+            .requestMatchers("/auth/me").authenticated()
             .requestMatchers("/bets/**").authenticated()
             .anyRequest().authenticated()
         )

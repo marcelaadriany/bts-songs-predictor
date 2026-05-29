@@ -12,4 +12,8 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
     List<Concert> findAllByOrderByConcertDateAsc();
 
     Optional<Concert> findByNameAndConcertDate(String name, LocalDate concertDate);
+
+    Optional<Concert> findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
+        LocalDate today
+    );
 }
