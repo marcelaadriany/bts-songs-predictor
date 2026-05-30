@@ -1,13 +1,10 @@
-import type { Album } from "../types/Album";
+import type { AlbumWithSongs } from "../types/song";
 import SongCheckbox from "./SongCheckbox";
 
 type Props = {
-  album: Album;
-
+  album: AlbumWithSongs;
   clickable?: boolean;
-
   selectedSongs?: number[];
-
   onSelect?: (id: number) => void;
 };
 

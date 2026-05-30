@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/useAuth";
 
 export default function Navbar() {
+  const { isAuthenticated, user, logout } = useAuth();
+
   return (
     <nav style={styles.navbar}>
       <div style={styles.logo}>🎤 BTS Surprise Songs</div>
@@ -18,9 +21,19 @@ export default function Navbar() {
           Results
         </Link>
 
-        <Link style={styles.link} to="/login">
-          Login
-        </Link>
+        {isAuthenticated && user ? (
+          <>
+            <span style={styles.username}>{user.username}</span>
+
+            <button style={styles.logoutButton} onClick={logout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link style={styles.link} to="/login">
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );
@@ -44,6 +57,7 @@ const styles = {
 
   links: {
     display: "flex",
+    alignItems: "center",
     gap: "20px",
   },
 
@@ -51,5 +65,18 @@ const styles = {
     color: "white",
     textDecoration: "none",
     fontWeight: 500,
+  },
+
+  username: {
+    fontWeight: "bold",
+  },
+
+  logoutButton: {
+    background: "transparent",
+    border: "none",
+    color: "white",
+    cursor: "pointer",
+    fontWeight: 500,
+    fontSize: "16px",
   },
 };
