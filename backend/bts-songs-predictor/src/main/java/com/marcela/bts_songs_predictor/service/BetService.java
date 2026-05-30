@@ -8,6 +8,7 @@ import com.marcela.bts_songs_predictor.repository.*;
 import java.time.LocalDate;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.context.SecurityContextHolder;
+import com.marcela.bts_songs_predictor.exception.BadRequestException;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class BetService {
 
   public BetResponseDTO createBet(BetRequestDTO dto) {
     if (dto.songIds() == null || dto.songIds().size() != 6) {
-      throw new IllegalArgumentException("A aposta deve conter exatamente 6 músicas.");
+      throw new BadRequestException("A aposta deve conter exatamente 6 músicas.");
     }
 
     User user = getAuthenticatedUser();
@@ -48,20 +49,20 @@ public class BetService {
     Concert concert = concertRepository
         .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
             LocalDate.now())
-        .orElseThrow(() -> new IllegalArgumentException("Nenhum próximo show disponível para apostas."));
+        .orElseThrow(() -> new BadRequestException("Nenhum próximo show disponível para apostas."));
 
     if (Boolean.TRUE.equals(concert.getResultReleased())) {
-      throw new IllegalArgumentException("Não é possível apostar em um show com resultado já liberado.");
+      throw new BadRequestException("Não é possível apostar em um show com resultado já liberado.");
     }
 
     if (betRepository.existsByUserIdAndConcertId(user.getId(), concert.getId())) {
-      throw new IllegalArgumentException("Você já fez uma aposta para este show.");
+      throw new BadRequestException("Você já fez uma aposta para este show.");
     }
 
     List<Song> songs = songRepository.findAllById(dto.songIds());
 
     if (songs.size() != 6) {
-      throw new IllegalArgumentException("Uma ou mais músicas não foram encontradas.");
+      throw new BadRequestException("Uma ou mais músicas não foram encontradas.");
     }
 
     Bet bet = new Bet();
@@ -98,16 +99,16 @@ public class BetService {
 
   public BetResponseDTO updateBet(Long betId, BetRequestDTO dto) {
     if (dto.songIds() == null || dto.songIds().size() != 6) {
-      throw new IllegalArgumentException("A aposta deve conter exatamente 6 músicas.");
+      throw new BadRequestException("A aposta deve conter exatamente 6 músicas.");
     }
 
     User user = getAuthenticatedUser();
 
     Bet bet = betRepository.findById(betId)
-        .orElseThrow(() -> new IllegalArgumentException("Aposta não encontrada."));
+        .orElseThrow(() -> new BadRequestException("Aposta não encontrada."));
 
     if (!bet.getUser().getId().equals(user.getId())) {
-      throw new IllegalArgumentException("Você não pode editar a aposta de outra usuária.");
+      throw new BadRequestException("Você não pode editar a aposta de outra usuária.");
     }
 
     Concert concert = bet.getConcert();
@@ -115,20 +116,20 @@ public class BetService {
     Concert nextConcert = concertRepository
         .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
             LocalDate.now())
-        .orElseThrow(() -> new IllegalArgumentException("Nenhum próximo show disponível para apostas."));
+        .orElseThrow(() -> new BadRequestException("Nenhum próximo show disponível para apostas."));
 
     if (!concert.getId().equals(nextConcert.getId())) {
-      throw new IllegalArgumentException("Só é possível editar apostas do próximo show.");
+      throw new BadRequestException("Só é possível editar apostas do próximo show.");
     }
 
     if (Boolean.TRUE.equals(concert.getResultReleased())) {
-      throw new IllegalArgumentException("Não é possível editar apostas após o resultado ser liberado.");
+      throw new BadRequestException("Não é possível editar apostas após o resultado ser liberado.");
     }
 
     List<Song> songs = songRepository.findAllById(dto.songIds());
 
     if (songs.size() != 6) {
-      throw new IllegalArgumentException("Uma ou mais músicas não foram encontradas.");
+      throw new BadRequestException("Uma ou mais músicas não foram encontradas.");
     }
 
     List<BetSong> existingBetSongs = betSongRepository.findByBetId(bet.getId());
