@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/useAuth";
+import Layout from "../components/Layout";
 
 export default function Login() {
   const { loginUser, registerUser, isAuthenticated } = useAuth();
@@ -54,57 +55,59 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h1>{isLoginMode ? "Login" : "Cadastro"}</h1>
+    <Layout>
+      <div>
+        <h1>{isLoginMode ? "Login" : "Cadastro"}</h1>
 
-      <form onSubmit={handleSubmit}>
-        {!isLoginMode && (
+        <form onSubmit={handleSubmit}>
+          {!isLoginMode && (
+            <div>
+              <label htmlFor="username">Username</label>
+
+              <input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                required={!isLoginMode}
+              />
+            </div>
+          )}
+
           <div>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
 
             <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              required={!isLoginMode}
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
             />
           </div>
-        )}
 
-        <div>
-          <label htmlFor="email">Email</label>
+          <div>
+            <label htmlFor="password">Senha</label>
 
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </div>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="password">Senha</label>
+          {success && <p style={{ color: "green" }}>{success}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
 
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-        </div>
+          <button type="submit">{isLoginMode ? "Entrar" : "Cadastrar"}</button>
+        </form>
 
-        {success && <p style={{ color: "green" }}>{success}</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <button type="submit">{isLoginMode ? "Entrar" : "Cadastrar"}</button>
-      </form>
-
-      <button type="button" onClick={handleToggleMode}>
-        {isLoginMode ? "Criar conta" : "Já tenho uma conta"}
-      </button>
-    </div>
+        <button type="button" onClick={handleToggleMode}>
+          {isLoginMode ? "Criar conta" : "Já tenho uma conta"}
+        </button>
+      </div>
+    </Layout>
   );
 }
