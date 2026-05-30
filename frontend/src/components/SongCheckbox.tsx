@@ -1,4 +1,4 @@
-import type { Song } from "../types/Song";
+import type { Song } from "../types/song";
 
 type Props = {
   song: Song;
@@ -16,7 +16,7 @@ export default function SongCheckbox({
   return (
     <div
       onClick={() => {
-        if (clickable && !song.played && onSelect) {
+        if (clickable && onSelect) {
           onSelect(song.id);
         }
       }}
@@ -24,8 +24,8 @@ export default function SongCheckbox({
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        cursor: clickable && !song.played ? "pointer" : "default",
-        opacity: song.played ? 0.5 : 1,
+        cursor: clickable ? "pointer" : "default",
+        opacity: song.alreadyPlayed ? 0.5 : 1,
         marginBottom: "8px",
       }}
     >
@@ -33,18 +33,19 @@ export default function SongCheckbox({
         style={{
           width: "18px",
           height: "18px",
-          border: "2px solid black",
-          transition: "0.3s",
+          border: "2px solid white",
           backgroundColor: selected ? "#ec4899" : "transparent",
         }}
       />
 
       <span
         style={{
-          textDecoration: song.played ? "line-through" : "none",
+          color: song.alreadyPlayed ? "#ec4899" : "white",
+          textDecoration: song.alreadyPlayed ? "line-through" : "none",
+          fontWeight: 600,
         }}
       >
-        {song.name}
+        {song.title}
       </span>
     </div>
   );
