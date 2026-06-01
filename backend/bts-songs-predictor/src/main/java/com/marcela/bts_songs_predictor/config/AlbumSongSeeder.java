@@ -39,7 +39,7 @@ public class AlbumSongSeeder implements CommandLineRunner {
     Album album2 = createAlbum("O!RUL8, 2?", 2);
     addSong(album2, "N.O");
     addSong(album2, "WE ON");
-    addSong(album2, "IF I RUDE THE WORLD");
+    addSong(album2, "IF I RULED THE WORLD");
     addSong(album2, "COFFEE");
     addSong(album2, "ATTACK ON BANGTAN");
     addSong(album2, "PALDOGANGSAN");
