@@ -5,6 +5,7 @@ type Props = {
   clickable?: boolean;
   selected?: boolean;
   onSelect?: (id: number) => void;
+  showCheckbox?: boolean;
 };
 
 export default function SongCheckbox({
@@ -12,6 +13,7 @@ export default function SongCheckbox({
   clickable = false,
   selected = false,
   onSelect,
+  showCheckbox = true,
 }: Props) {
   return (
     <div
@@ -29,14 +31,16 @@ export default function SongCheckbox({
         marginBottom: "8px",
       }}
     >
-      <div
-        style={{
-          width: "18px",
-          height: "18px",
-          border: "2px solid white",
-          backgroundColor: selected ? "#ec4899" : "transparent",
-        }}
-      />
+      {showCheckbox && (
+        <div
+          style={{
+            width: "18px",
+            height: "18px",
+            border: "2px solid white",
+            backgroundColor: selected ? "#ec4899" : "transparent",
+          }}
+        />
+      )}
 
       <span
         style={{

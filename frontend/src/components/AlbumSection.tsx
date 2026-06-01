@@ -6,6 +6,7 @@ type Props = {
   clickable?: boolean;
   selectedSongs?: number[];
   onSelect?: (id: number) => void;
+  showCheckbox?: boolean;
 };
 
 export default function AlbumSection({
@@ -13,6 +14,7 @@ export default function AlbumSection({
   clickable = false,
   selectedSongs = [],
   onSelect,
+  showCheckbox = true,
 }: Props) {
   return (
     <div style={styles.container}>
@@ -25,6 +27,7 @@ export default function AlbumSection({
           clickable={clickable}
           selected={selectedSongs.includes(song.id)}
           onSelect={onSelect}
+          showCheckbox={showCheckbox}
         />
       ))}
     </div>

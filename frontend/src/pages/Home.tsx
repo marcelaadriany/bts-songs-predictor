@@ -41,7 +41,7 @@ export default function Home() {
         {!isLoading && !error && (
           <div style={styles.grid}>
             {albums.map((album) => (
-              <AlbumSection key={album.id} album={album} />
+              <AlbumSection key={album.id} album={album} showCheckbox={false} />
             ))}
           </div>
         )}
