@@ -5,6 +5,8 @@ import Layout from "../components/Layout";
 import { getSongsGroupedByAlbum } from "../api/songService";
 import type { AlbumWithSongs } from "../types/song";
 
+import styles from "./Home.module.css";
+
 export default function Home() {
   const [albums, setAlbums] = useState<AlbumWithSongs[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,11 +18,9 @@ export default function Home() {
         const data = await getSongsGroupedByAlbum();
         setAlbums(data);
       } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Erro ao carregar músicas.");
-        }
+        setError(
+          error instanceof Error ? error.message : "Erro ao carregar músicas.",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -31,44 +31,27 @@ export default function Home() {
 
   return (
     <Layout>
-      <div style={styles.container}>
-        <h1 style={styles.title}>BTS Surprise Songs</h1>
+      <main className={styles.page}>
+        <section className={styles.board}>
+          <h1 className={styles.title}>BTS Surprise Songs</h1>
 
-        {isLoading && <p>Carregando músicas...</p>}
+          {isLoading && <p className={styles.status}>Carregando músicas...</p>}
 
-        {error && <p style={styles.error}>{error}</p>}
+          {error && <p className={styles.error}>{error}</p>}
 
-        {!isLoading && !error && (
-          <div style={styles.grid}>
-            {albums.map((album) => (
-              <AlbumSection key={album.id} album={album} />
-            ))}
-          </div>
-        )}
-      </div>
+          {!isLoading && !error && (
+            <div className={styles.grid}>
+              {albums.map((album) => (
+                <AlbumSection
+                  key={album.id}
+                  album={album}
+                  showCheckbox={false}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
     </Layout>
   );
 }
-
-const styles = {
-  container: {
-    padding: "20px",
-    fontFamily: "Arial",
-  },
-
-  title: {
-    textAlign: "center" as const,
-    marginBottom: "40px",
-  },
-
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "24px",
-  },
-
-  error: {
-    color: "red",
-    textAlign: "center" as const,
-  },
-};

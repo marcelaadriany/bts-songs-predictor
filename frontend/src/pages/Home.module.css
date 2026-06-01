@@ -1,0 +1,40 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 32px;
+  background: #f7f9fb;
+  color: #010000;
+}
+
+.board {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 40px 48px;
+  border-radius: 12px;
+  background: #f7f9fb;
+  box-shadow: 0 20px 50px rgba(1, 0, 0, 0.12);
+}
+
+.title {
+  margin: 0 0 40px;
+  text-align: center;
+  color: #010000;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.grid {
+  columns: 5 220px;
+  column-gap: 34px;
+}
+
+.status,
+.error {
+  text-align: center;
+  font-weight: 700;
+}
+
+.error {
+  color: #c91530;
+}

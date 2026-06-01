@@ -1,0 +1,22 @@
+.section {
+  break-inside: avoid;
+  margin-bottom: 26px;
+}
+
+.title {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 6px 12px;
+  border-radius: 2px;
+  background: #c91530;
+  color: #f7f9fb;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.songList {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
