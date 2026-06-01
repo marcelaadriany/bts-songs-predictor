@@ -11,12 +11,15 @@ import { useAuth } from "../contexts/useAuth";
 
 import type { AlbumWithSongs } from "../types/song";
 
+import styles from "./Bet.module.css";
+
 export default function Bet() {
   const { isAuthenticated } = useAuth();
 
   const [albums, setAlbums] = useState<AlbumWithSongs[]>([]);
   const [selectedSongs, setSelectedSongs] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [showLoginMessage, setShowLoginMessage] = useState(false);
 
@@ -26,11 +29,9 @@ export default function Bet() {
         const data = await getSongsGroupedByAlbum();
         setAlbums(data);
       } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Erro ao carregar músicas.");
-        }
+        setError(
+          error instanceof Error ? error.message : "Erro ao carregar músicas.",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -70,6 +71,8 @@ export default function Bet() {
     }
 
     try {
+      setIsSubmitting(true);
+
       await createBet({
         songIds: selectedSongs,
       });
@@ -81,124 +84,68 @@ export default function Bet() {
       } else {
         toast.error("Erro ao enviar aposta.");
       }
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   return (
     <Layout>
-      <div style={styles.container}>
-        <h1 style={styles.title}>🎯 Make Your Bet</h1>
+      <main className={styles.page}>
+        <section className={styles.board}>
+          <header className={styles.header}>
+            <h1 className={styles.title}>Make Your Bet</h1>
 
-        <p style={styles.subtitle}>
-          Selecione 6 músicas que você acha que serão tocadas no próximo show.
-        </p>
+            <p className={styles.subtitle}>
+              Selecione 6 músicas que você acha que serão tocadas no próximo
+              show. As músicas já tocadas também podem ser escolhidas.
+            </p>
 
-        <div style={styles.counter}>
-          Selecionadas: {selectedSongs.length} / 6
-        </div>
+            <div className={styles.counter}>
+              Selecionadas: {selectedSongs.length} / 6
+            </div>
+          </header>
 
-        {showLoginMessage && (
-          <div style={styles.loginWarning}>
-            <p>Faça login para apostar.</p>
+          {showLoginMessage && (
+            <div className={styles.loginWarning}>
+              <p>Faça login para apostar.</p>
 
-            <Link style={styles.loginButton} to="/login">
-              Ir para login
-            </Link>
+              <Link className={styles.loginButton} to="/login">
+                Ir para login
+              </Link>
+            </div>
+          )}
+
+          {isLoading && <p className={styles.status}>Carregando músicas...</p>}
+
+          {error && <p className={styles.error}>{error}</p>}
+
+          {!isLoading && !error && (
+            <div className={styles.grid}>
+              {albums.map((album) => (
+                <AlbumSection
+                  key={album.id}
+                  album={album}
+                  clickable
+                  selectedSongs={selectedSongs}
+                  onSelect={handleSelect}
+                  showCheckbox
+                />
+              ))}
+            </div>
+          )}
+
+          <div className={styles.footer}>
+            <button
+              className={styles.button}
+              onClick={handleSubmitBet}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Enviar"}
+            </button>
           </div>
-        )}
-
-        {isLoading && <p>Carregando músicas...</p>}
-
-        {error && <p style={styles.error}>{error}</p>}
-
-        {!isLoading && !error && (
-          <div style={styles.grid}>
-            {albums.map((album) => (
-              <AlbumSection
-                key={album.id}
-                album={album}
-                clickable
-                selectedSongs={selectedSongs}
-                onSelect={handleSelect}
-              />
-            ))}
-          </div>
-        )}
-
-        <div style={styles.footer}>
-          <button style={styles.button} onClick={handleSubmitBet}>
-            Submit Bet
-          </button>
-        </div>
-      </div>
+        </section>
+      </main>
     </Layout>
   );
 }
-
-const styles = {
-  container: {
-    padding: "20px",
-    fontFamily: "Arial",
-  },
-
-  title: {
-    textAlign: "center" as const,
-    marginBottom: "8px",
-  },
-
-  subtitle: {
-    textAlign: "center" as const,
-    color: "#666",
-    marginBottom: "24px",
-  },
-
-  counter: {
-    textAlign: "center" as const,
-    marginBottom: "24px",
-    fontWeight: "bold",
-  },
-
-  loginWarning: {
-    textAlign: "center" as const,
-    marginBottom: "24px",
-    color: "#ef4444",
-    fontWeight: "bold",
-  },
-
-  loginButton: {
-    display: "inline-block",
-    marginTop: "8px",
-    padding: "8px 16px",
-    backgroundColor: "#ec4899",
-    color: "white",
-    textDecoration: "none",
-    borderRadius: "8px",
-  },
-
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "24px",
-  },
-
-  footer: {
-    marginTop: "40px",
-    display: "flex",
-    justifyContent: "center",
-  },
-
-  button: {
-    padding: "12px 24px",
-    border: "none",
-    borderRadius: "8px",
-    backgroundColor: "#ec4899",
-    color: "white",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
-
-  error: {
-    color: "red",
-    textAlign: "center" as const,
-  },
-};

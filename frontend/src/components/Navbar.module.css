@@ -1,0 +1,103 @@
+.navbar {
+  height: 88px;
+  padding: 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #010000;
+  color: #f7f9fb;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #f7f9fb;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.logoMark {
+  color: #c91530;
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -0.35em;
+}
+
+.brand strong {
+  display: block;
+  font-size: 2rem;
+  line-height: 0.9;
+}
+
+.brand span:last-child {
+  display: block;
+  max-width: 120px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.link,
+.activeLink,
+.loginLink {
+  padding: 12px 18px;
+  border-radius: 4px;
+  color: #f7f9fb;
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.activeLink {
+  background: #c91530;
+}
+
+.authArea {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.username {
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.logoutButton {
+  border: none;
+  background: transparent;
+  color: #f7f9fb;
+  cursor: pointer;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.link,
+.activeLink,
+.loginLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 18px;
+  border-radius: 4px;
+
+  color: #f7f9fb;
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.logoImage {
+  width: 180px;
+  height: auto;
+  display: block;
+}

@@ -1,82 +1,69 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/useAuth";
+import styles from "./Navbar.module.css";
+
+import { FiHome, FiMusic, FiBarChart2, FiUser } from "react-icons/fi";
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
 
   return (
-    <nav style={styles.navbar}>
-      <div style={styles.logo}>🎤 BTS Surprise Songs</div>
+    <header className={styles.navbar}>
+      <Link to="/" className={styles.brand}>
+        <img
+          src="/images/arirang-logo.png"
+          alt="Arirang logo"
+          className={styles.logoImage}
+        />
+      </Link>
 
-      <div style={styles.links}>
-        <Link style={styles.link} to="/">
+      <nav className={styles.links}>
+        <NavLink
+          to="/"
+          className={({ isActive }: { isActive: boolean }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          <FiHome />
           Home
-        </Link>
+        </NavLink>
 
-        <Link style={styles.link} to="/bet">
+        <NavLink
+          to="/bet"
+          className={({ isActive }: { isActive: boolean }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          <FiMusic />
           Bet
-        </Link>
+        </NavLink>
 
-        <Link style={styles.link} to="/results">
+        <NavLink
+          to="/results"
+          className={({ isActive }: { isActive: boolean }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          <FiBarChart2 />
           Results
-        </Link>
+        </NavLink>
+      </nav>
 
+      <div className={styles.authArea}>
         {isAuthenticated && user ? (
           <>
-            <span style={styles.username}>{user.username}</span>
-
-            <button style={styles.logoutButton} onClick={logout}>
+            <span className={styles.username}>{user.username}</span>
+            <button className={styles.logoutButton} onClick={logout}>
               Logout
             </button>
           </>
         ) : (
-          <Link style={styles.link} to="/login">
+          <Link to="/login" className={styles.loginLink}>
+            <FiUser />
             Login
           </Link>
         )}
       </div>
-    </nav>
+    </header>
   );
 }
-
-const styles = {
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 24px",
-    backgroundColor: "#111827",
-    color: "white",
-    marginBottom: "32px",
-  },
-
-  logo: {
-    fontWeight: "bold",
-    fontSize: "20px",
-  },
-
-  links: {
-    display: "flex",
-    alignItems: "center",
-    gap: "20px",
-  },
-
-  link: {
-    color: "white",
-    textDecoration: "none",
-    fontWeight: 500,
-  },
-
-  username: {
-    fontWeight: "bold",
-  },
-
-  logoutButton: {
-    background: "transparent",
-    border: "none",
-    color: "white",
-    cursor: "pointer",
-    fontWeight: 500,
-    fontSize: "16px",
-  },
-};

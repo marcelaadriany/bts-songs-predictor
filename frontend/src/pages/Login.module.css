@@ -1,0 +1,110 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 32px;
+  background: #f7f9fb;
+  color: #010000;
+}
+
+.card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 12px;
+  background: #f7f9fb;
+  box-shadow: 0 20px 50px rgba(1, 0, 0, 0.12);
+}
+
+.title {
+  margin: 0 0 28px;
+  text-align: center;
+  color: #010000;
+  font-size: 2.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: #010000;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.input {
+  padding: 13px 14px;
+  border: 2px solid #010000;
+  border-radius: 4px;
+  background: #f7f9fb;
+  color: #010000;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #c91530;
+}
+
+.success {
+  margin: 0;
+  padding: 12px;
+  border-left: 4px solid #97182b;
+  background: rgba(151, 24, 43, 0.08);
+  color: #97182b;
+  font-weight: 800;
+}
+
+.error {
+  margin: 0;
+  padding: 12px;
+  border-left: 4px solid #c91530;
+  background: rgba(201, 21, 48, 0.08);
+  color: #c91530;
+  font-weight: 800;
+}
+
+.submitButton {
+  margin-top: 8px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 4px;
+  background: #c91530;
+  color: #f7f9fb;
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.submitButton:hover {
+  background: #97182b;
+}
+
+.toggleButton {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px 16px;
+  border: 2px solid #010000;
+  border-radius: 4px;
+  background: transparent;
+  color: #010000;
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.toggleButton:hover {
+  border-color: #97182b;
+  color: #97182b;
+}

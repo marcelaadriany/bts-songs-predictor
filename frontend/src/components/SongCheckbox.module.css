@@ -1,0 +1,32 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #010000;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.8px solid #010000;
+  flex-shrink: 0;
+}
+
+.selected {
+  background: #c91530;
+}
+
+.title {
+  color: #010000;
+}
+
+.played {
+  color: #97182b;
+}
