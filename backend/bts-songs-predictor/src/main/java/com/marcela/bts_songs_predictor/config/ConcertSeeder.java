@@ -42,9 +42,9 @@ public class ConcertSeeder implements CommandLineRunner {
     addConcert("EL PASO, EUA", LocalDate.of(2026, 5, 2));
     addConcert("EL PASO, EUA", LocalDate.of(2026, 5, 3));
 
-    addConcert("MÉXICO CITY, MX", LocalDate.of(2026, 5, 7));
-    addConcert("MÉXICO CITY, MX", LocalDate.of(2026, 5, 9));
-    addConcert("MÉXICO CITY, MX", LocalDate.of(2026, 5, 10));
+    addConcert("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 7));
+    addConcert("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 9));
+    addConcert("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 10));
 
     addConcert("STANFORD, EUA", LocalDate.of(2026, 5, 16));
     addConcert("STANFORD, EUA", LocalDate.of(2026, 5, 17));
