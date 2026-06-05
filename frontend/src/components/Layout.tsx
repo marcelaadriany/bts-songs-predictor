@@ -6,22 +6,11 @@ type Props = {
   children: ReactNode;
 };
 
-export default function Layout({
-  children,
-}: Props) {
+export default function Layout({ children }: Props) {
   return (
     <>
       <Navbar />
-
-      <main style={styles.main}>
-        {children}
-      </main>
+      {children}
     </>
   );
 }
-
-const styles = {
-  main: {
-    padding: "20px",
-  },
-};

@@ -1,103 +1,80 @@
 .navbar {
-  height: 88px;
-  padding: 0 38px;
+  height: 50px;
+  padding: 0 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #010000;
-  color: #f7f9fb;
+  background: #f7f9fb;
+  border-bottom: 1px solid rgba(1, 0, 0, 0.1);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: #f7f9fb;
   text-decoration: none;
+}
+
+.logoImage {
+  width: 90px;
+  height: auto;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.registerLink {
+  color: #010000;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
-.logoMark {
+.registerLink:hover {
   color: #c91530;
-  font-size: 2.4rem;
-  font-weight: 900;
-  letter-spacing: -0.35em;
 }
 
-.brand strong {
-  display: block;
-  font-size: 2rem;
-  line-height: 0.9;
-}
-
-.brand span:last-child {
-  display: block;
-  max-width: 120px;
-  font-size: 0.78rem;
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: 0.04em;
-}
-
-.links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-
-.link,
-.activeLink,
-.loginLink {
-  padding: 12px 18px;
-  border-radius: 4px;
-  color: #f7f9fb;
+.loginButton {
+  padding: 6px 24px;
+  border: 1px solid #c91530;
+  border-radius: 6px;
+  color: #c91530;
+  background: transparent;
   text-decoration: none;
-  font-weight: 800;
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
-.activeLink {
+.loginButton:hover {
   background: #c91530;
-}
-
-.authArea {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  color: #f7f9fb;
 }
 
 .username {
+  color: #010000;
+  font-size: 0.9rem;
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .logoutButton {
-  border: none;
+  padding: 14px 28px;
+  border: 1px solid #c91530;
+  border-radius: 6px;
   background: transparent;
-  color: #f7f9fb;
+  color: #c91530;
   cursor: pointer;
-  font-weight: 800;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
-.link,
-.activeLink,
-.loginLink {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 12px 18px;
-  border-radius: 4px;
-
+.logoutButton:hover {
+  background: #c91530;
   color: #f7f9fb;
-  text-decoration: none;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.logoImage {
-  width: 180px;
-  height: auto;
-  display: block;
 }

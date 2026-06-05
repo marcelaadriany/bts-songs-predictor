@@ -1,0 +1,56 @@
+.card {
+  min-width: 220px;
+  padding: 18px;
+  border: 1px solid rgba(1, 0, 0, 0.14);
+  border-radius: 6px;
+  background: #f7f9fb;
+  color: #010000;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  border-color: #c91530;
+  transform: translateY(-2px);
+}
+
+.selected {
+  border-color: #c91530;
+  box-shadow: 0 10px 24px rgba(201, 21, 48, 0.18);
+}
+
+.status {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: rgba(201, 21, 48, 0.12);
+  color: #c91530;
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.name {
+  margin: 0 0 14px;
+  color: #010000;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.date {
+  margin: 0 0 22px;
+  color: #7b585d;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.action {
+  color: #c91530;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
