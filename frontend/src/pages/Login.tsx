@@ -6,6 +6,8 @@ import { useAuth } from "../contexts/useAuth";
 
 import styles from "./Login.module.css";
 
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
 type Props = {
   initialMode?: "login" | "register";
 };
@@ -18,9 +20,13 @@ export default function Login({ initialMode = "login" }: Props) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,7 +40,7 @@ export default function Login({ initialMode = "login" }: Props) {
         return;
       }
 
-      await registerUser(username, email, password);
+      await registerUser(username, email, password, confirmPassword);
 
       setSuccess("Cadastro realizado com sucesso! Agora faça login.");
       setIsLoginMode(true);
@@ -51,6 +57,7 @@ export default function Login({ initialMode = "login" }: Props) {
     setSuccess("");
     setUsername("");
     setPassword("");
+    setConfirmPassword("");
   }
 
   if (isAuthenticated) {
@@ -68,21 +75,6 @@ export default function Login({ initialMode = "login" }: Props) {
           <div className={styles.titleUnderline} />
 
           <form className={styles.form} onSubmit={handleSubmit}>
-            {!isLoginMode && (
-              <div className={styles.field}>
-                <label htmlFor="username">Username</label>
-
-                <input
-                  id="username"
-                  type="text"
-                  placeholder="Digite seu username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  required
-                />
-              </div>
-            )}
-
             <div className={styles.field}>
               <label htmlFor="email">Email</label>
 
@@ -99,16 +91,50 @@ export default function Login({ initialMode = "login" }: Props) {
             <div className={styles.field}>
               <label htmlFor="password">Senha</label>
 
-              <input
-                id="password"
-                type="password"
-                placeholder="Digite sua senha"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-              />
+              <div className={styles.passwordWrapper}>
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Digite sua senha"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className={styles.eyeButton}
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                </button>
+              </div>
             </div>
 
+            {!isLoginMode && (
+              <div className={styles.field}>
+                <label htmlFor="confirmPassword">Confirmar senha</label>
+
+                <div className={styles.passwordWrapper}>
+                  <input
+                    id="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Digite novamente sua senha"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className={styles.eyeButton}
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+                  </button>
+                </div>
+              </div>
+            )}
             {success && <p className={styles.success}>{success}</p>}
             {error && <p className={styles.error}>{error}</p>}
 

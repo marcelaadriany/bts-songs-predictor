@@ -159,4 +159,36 @@
   .logo {
     width: 240px;
   }
+
+  .passwordWrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .passwordWrapper input {
+    width: 100%;
+    padding-right: 52px;
+  }
+
+  .eyeButton {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 24px;
+    height: 24px;
+
+    border: none;
+    background: transparent;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    color: #010000;
+    font-size: 1.1rem;
+  }
 }
