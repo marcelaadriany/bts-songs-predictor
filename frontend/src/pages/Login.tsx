@@ -6,10 +6,14 @@ import { useAuth } from "../contexts/useAuth";
 
 import styles from "./Login.module.css";
 
-export default function Login() {
+type Props = {
+  initialMode?: "login" | "register";
+};
+
+export default function Login({ initialMode = "login" }: Props) {
   const { loginUser, registerUser, isAuthenticated } = useAuth();
 
-  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoginMode, setIsLoginMode] = useState(initialMode === "login");
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -37,11 +41,7 @@ export default function Login() {
       setUsername("");
       setPassword("");
     } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Erro inesperado. Tente novamente.");
-      }
+      setError(error instanceof Error ? error.message : "Erro inesperado.");
     }
   }
 
@@ -61,35 +61,35 @@ export default function Login() {
     <Layout>
       <main className={styles.page}>
         <section className={styles.card}>
-          <h1 className={styles.title}>{isLoginMode ? "Login" : "Cadastro"}</h1>
+          <h1 className={styles.title}>
+            {isLoginMode ? "Login" : "Criar conta"}
+          </h1>
+
+          <div className={styles.titleUnderline} />
 
           <form className={styles.form} onSubmit={handleSubmit}>
             {!isLoginMode && (
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="username">
-                  Username
-                </label>
+                <label htmlFor="username">Username</label>
 
                 <input
-                  className={styles.input}
                   id="username"
                   type="text"
+                  placeholder="Digite seu username"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
-                  required={!isLoginMode}
+                  required
                 />
               </div>
             )}
 
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="email">
-                Email
-              </label>
+              <label htmlFor="email">Email</label>
 
               <input
-                className={styles.input}
                 id="email"
                 type="email"
+                placeholder="Digite seu email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
@@ -97,14 +97,12 @@ export default function Login() {
             </div>
 
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="password">
-                Senha
-              </label>
+              <label htmlFor="password">Senha</label>
 
               <input
-                className={styles.input}
                 id="password"
                 type="password"
+                placeholder="Digite sua senha"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
@@ -115,17 +113,22 @@ export default function Login() {
             {error && <p className={styles.error}>{error}</p>}
 
             <button className={styles.submitButton} type="submit">
-              {isLoginMode ? "Entrar" : "Cadastrar"}
+              {isLoginMode ? "Login" : "Criar conta"}
             </button>
           </form>
 
-          <button
-            className={styles.toggleButton}
-            type="button"
-            onClick={handleToggleMode}
-          >
-            {isLoginMode ? "Criar conta" : "Já tenho uma conta"}
-          </button>
+          <div className={styles.divider}>
+            <span />
+            <p>ou</p>
+            <span />
+          </div>
+
+          <p className={styles.switchText}>
+            {isLoginMode ? "Ainda não tem uma conta?" : "Já tem uma conta?"}{" "}
+            <button type="button" onClick={handleToggleMode}>
+              {isLoginMode ? "Criar conta" : "Fazer login"}
+            </button>
+          </p>
         </section>
       </main>
     </Layout>

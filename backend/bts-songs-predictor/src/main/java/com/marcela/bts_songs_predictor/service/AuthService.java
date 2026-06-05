@@ -31,13 +31,16 @@ public class AuthService {
   }
 
   public UserResponseDTO register(RegisterRequestDTO dto) {
-
     if (userRepository.existsByEmail(dto.email())) {
       throw new BadRequestException("Email já cadastrado.");
     }
 
     if (userRepository.existsByUsername(dto.username())) {
       throw new BadRequestException("Username já cadastrado.");
+    }
+
+    if (!dto.password().equals(dto.confirmPassword())) {
+      throw new BadRequestException("As senhas não coincidem.");
     }
 
     User user = new User();

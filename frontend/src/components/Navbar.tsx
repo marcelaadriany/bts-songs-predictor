@@ -26,7 +26,7 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login" className={styles.registerLink}>
+            <Link to="/register" className={styles.registerLink}>
               Criar conta
             </Link>
 
