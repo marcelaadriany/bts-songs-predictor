@@ -6,6 +6,10 @@
   justify-content: space-between;
   background: #f7f9fb;
   border-bottom: 1px solid rgba(1, 0, 0, 0.1);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .brand {
