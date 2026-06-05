@@ -54,9 +54,9 @@ public class ConcertResultSeeder implements CommandLineRunner {
     addConcertResult("EL PASO, EUA", LocalDate.of(2026, 5, 2), "ON", "WINGS");
     addConcertResult("EL PASO, EUA", LocalDate.of(2026, 5, 3), "DIONYSUS", "BEST OF ME");
 
-    addConcertResult("MÉXICO CITY, MX", LocalDate.of(2026, 5, 7), "SO WHAT", "BOY IN LUV");
-    addConcertResult("MÉXICO CITY, MX", LocalDate.of(2026, 5, 9), "WE ARE BULLETPROOF PT. 2", "JUST ONE DAY");
-    addConcertResult("MÉXICO CITY, MX", LocalDate.of(2026, 5, 10), "AIRPLANE PT. 2", "SPRING DAY");
+    addConcertResult("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 7), "SO WHAT", "BOY IN LUV");
+    addConcertResult("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 9), "WE ARE BULLETPROOF PT. 2", "JUST ONE DAY");
+    addConcertResult("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 10), "AIRPLANE PT. 2", "SPRING DAY");
 
     addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 16), "N.O", "ANPANMAN");
     addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 17), "DOPE", "BLOOD SWEAT & TEARS");
