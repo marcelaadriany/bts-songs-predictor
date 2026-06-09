@@ -23,7 +23,7 @@
   border-color: #e60012;
 }
 
-.status {
+.nextStatus {
   display: inline-block;
   margin-bottom: 18px;
   padding: 5px 9px;
@@ -32,6 +32,19 @@
   color: #e60012;
   font-size: 0.7rem;
   font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pastStatus {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 26px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: #efefef;
+  color: #6b6b6b;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -45,21 +58,55 @@
 }
 
 .date {
-  margin: 0 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
   color: #111111;
   font-size: 0.95rem;
   font-weight: 400;
-  text-transform: none;
 }
 
 .action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   color: #e60012;
-  font-size: 0.8rem;
+
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .card {
   flex: 0 0 240px;
   width: 240px;
   min-height: 220px;
+}
+.betButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  border: 1px solid #e60012;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #e60012;
+  text-decoration: none;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  transition: all 0.2s ease;
+}
+
+.betButton:hover {
+  background: #e60012;
+  color: #ffffff;
 }

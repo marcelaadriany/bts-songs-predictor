@@ -37,7 +37,7 @@ export default function Home() {
 
         setConcerts(concertsData);
         setNextConcert(nextConcertData);
-        setSelectedConcert(nextConcertData);
+        setSelectedConcert(null);
       } catch (error) {
         setError(
           error instanceof Error ? error.message : "Erro ao carregar shows.",
@@ -201,10 +201,6 @@ export default function Home() {
                       ? "Realizado"
                       : "Próximo show"}
                   </span>
-
-                  <button className={styles.detailsAction}>
-                    Ver músicas tocadas
-                  </button>
                 </div>
 
                 <div className={styles.surpriseSongs}>

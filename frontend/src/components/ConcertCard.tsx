@@ -2,6 +2,9 @@ import type { Concert } from "../types/concert";
 
 import styles from "./ConcertCard.module.css";
 
+import { FiCalendar, FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
+
 type Props = {
   concert: Concert;
   isSelected: boolean;
@@ -15,6 +18,9 @@ export default function ConcertCard({
   isNextConcert,
   onSelect,
 }: Props) {
+  const isPastConcert = concert.resultReleased;
+  const isFutureConcert = !concert.resultReleased;
+
   function formatDate(date: string) {
     return new Date(date).toLocaleDateString("pt-BR", {
       day: "2-digit",
@@ -24,31 +30,42 @@ export default function ConcertCard({
     });
   }
 
-  function getStatusLabel() {
-    if (isNextConcert) {
-      return "Próximo show";
-    }
-
-    if (concert.resultReleased) {
-      return "Realizado";
-    }
-
-    return "Próximo show";
-  }
-
   return (
     <button
       className={`${styles.card} ${isSelected ? styles.selected : ""}`}
       onClick={() => onSelect(concert)}
       type="button"
     >
-      <span className={styles.status}>{getStatusLabel()}</span>
+      {!isPastConcert && (
+        <span className={styles.nextStatus}>
+          {isNextConcert ? "Próximo show" : "Em breve"}
+        </span>
+      )}
 
       <h3 className={styles.name}>{concert.name}</h3>
 
-      <p className={styles.date}>{formatDate(concert.concertDate)}</p>
+      <div className={styles.date}>
+        <FiCalendar />
+        <span>{formatDate(concert.concertDate)}</span>
+      </div>
 
-      <span className={styles.action}>Ver músicas tocadas</span>
+      {isPastConcert && <span className={styles.pastStatus}>Realizado</span>}
+
+      {isFutureConcert ? (
+        <Link
+          to="/bet"
+          className={styles.betButton}
+          onClick={(event: React.MouseEvent<HTMLAnchorElement>) =>
+            event.stopPropagation()
+          }
+        >
+          Selecionar músicas
+        </Link>
+      ) : (
+        <span className={styles.action}>
+          Ver músicas tocadas <FiArrowRight />
+        </span>
+      )}
     </button>
   );
 }
