@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import ConcertCard from "../components/ConcertCard";
 
+import { useRef } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
 import {
   getConcerts,
   getNextConcert,
@@ -22,6 +25,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingResults, setIsLoadingResults] = useState(false);
   const [error, setError] = useState("");
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadHomeData() {
@@ -74,20 +78,83 @@ export default function Home() {
     });
   }
 
+  function getVisibleConcerts() {
+    if (!nextConcert) {
+      return concerts;
+    }
+
+    const nextCityConcerts = concerts
+      .filter(
+        (concert) =>
+          !concert.resultReleased && concert.name === nextConcert.name,
+      )
+      .sort(
+        (a, b) =>
+          new Date(a.concertDate).getTime() - new Date(b.concertDate).getTime(),
+      );
+
+    const pastConcerts = concerts
+      .filter((concert) => concert.resultReleased)
+      .sort(
+        (a, b) =>
+          new Date(b.concertDate).getTime() - new Date(a.concertDate).getTime(),
+      );
+
+    return [...nextCityConcerts, ...pastConcerts];
+  }
+
+  function scrollLeft() {
+    cardsRef.current?.scrollBy({
+      left: -500,
+      behavior: "smooth",
+    });
+  }
+
+  function scrollRight() {
+    cardsRef.current?.scrollBy({
+      left: 500,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <Layout>
       <main className={styles.page}>
         <section className={styles.hero}>
-          <img
-            src="/images/arirang-tour-logo.jpg"
-            alt="BTS World Tour Arirang"
-            className={styles.heroImage}
-          />
-        </section>
+          <div className={styles.heroText}>
+            <h1>Quais serão as próximas músicas surpresa?</h1>
 
-        <section className={styles.sectionHeader}>
-          <span className={styles.line}></span>
-          <h2>Shows da turnê</h2>
+            <p>
+              Faça suas apostas e tente acertar as 2 músicas surpresa de cada
+              show.
+            </p>
+          </div>
+
+          <div className={styles.countdownBox}>
+            <div className={styles.countdownTitle}>Faltam</div>
+
+            <div className={styles.countdownNumbers}>
+              <div>
+                <strong>06</strong>
+                <span>Dias</span>
+              </div>
+
+              <div>
+                <strong>23</strong>
+                <span>Horas</span>
+              </div>
+
+              <div>
+                <strong>48</strong>
+                <span>Min</span>
+              </div>
+
+              <div>
+                <strong>19</strong>
+                <span>Seg</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         {isLoading && <p className={styles.status}>Carregando shows...</p>}
@@ -96,39 +163,61 @@ export default function Home() {
 
         {!isLoading && !error && (
           <>
-            <section className={styles.cards}>
-              {concerts.map((concert) => (
-                <ConcertCard
-                  key={concert.id}
-                  concert={concert}
-                  isSelected={selectedConcert?.id === concert.id}
-                  isNextConcert={nextConcert?.id === concert.id}
-                  onSelect={setSelectedConcert}
-                />
-              ))}
+            <section className={styles.section}>
+              <h2 className={styles.sectionTitle}>Shows da turnê</h2>
+
+              <div className={styles.carouselWrapper}>
+                <button className={styles.arrowLeft} onClick={scrollLeft}>
+                  <FiChevronLeft />
+                </button>
+
+                <div ref={cardsRef} className={styles.cards}>
+                  {getVisibleConcerts().map((concert) => (
+                    <ConcertCard
+                      key={concert.id}
+                      concert={concert}
+                      isSelected={selectedConcert?.id === concert.id}
+                      isNextConcert={nextConcert?.id === concert.id}
+                      onSelect={setSelectedConcert}
+                    />
+                  ))}
+                </div>
+
+                <button className={styles.arrowRight} onClick={scrollRight}>
+                  <FiChevronRight />
+                </button>
+              </div>
             </section>
 
             {selectedConcert && (
               <section className={styles.details}>
                 <div className={styles.detailsInfo}>
-                  <span className={styles.detailsLabel}>Selected show</span>
-
                   <h2>{selectedConcert.name}</h2>
 
                   <p>{formatFullDate(selectedConcert.concertDate)}</p>
+
+                  <span className={styles.detailsBadge}>
+                    {selectedConcert.resultReleased
+                      ? "Realizado"
+                      : "Próximo show"}
+                  </span>
+
+                  <button className={styles.detailsAction}>
+                    Ver músicas tocadas
+                  </button>
                 </div>
 
                 <div className={styles.surpriseSongs}>
-                  <h3>Surprise Songs</h3>
+                  <h3>Músicas surpresas</h3>
 
                   {isLoadingResults && <p>Carregando resultados...</p>}
 
                   {!isLoadingResults && concertResults.length > 0 && (
-                    <ul className={styles.resultList}>
+                    <ol className={styles.resultList}>
                       {concertResults.map((result) => (
                         <li key={result.songId}>{result.songTitle}</li>
                       ))}
-                    </ul>
+                    </ol>
                   )}
 
                   {!isLoadingResults && concertResults.length === 0 && (

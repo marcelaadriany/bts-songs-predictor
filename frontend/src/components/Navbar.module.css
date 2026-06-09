@@ -67,13 +67,13 @@
 }
 
 .logoutButton {
-  padding: 14px 28px;
+  padding: 6px 24px;
   border: 1px solid #c91530;
   border-radius: 6px;
   background: transparent;
   color: #c91530;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -81,4 +81,75 @@
 .logoutButton:hover {
   background: #c91530;
   color: #f7f9fb;
+}
+
+.userMenu {
+  position: relative;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  background: transparent;
+  color: #c91530;
+
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.userIcon {
+  font-size: 1.25rem;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+
+  width: 210px;
+  padding: 10px 0;
+
+  border: 1px solid rgba(1, 0, 0, 0.08);
+  border-radius: 4px;
+  background: #f7f9fb;
+  box-shadow: 0 12px 28px rgba(1, 0, 0, 0.12);
+
+  z-index: 2000;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 12px 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  background: transparent;
+  color: #010000;
+
+  cursor: pointer;
+  text-decoration: none;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.dropdownItem:hover {
+  background: rgba(201, 21, 48, 0.08);
+  color: #c91530;
 }

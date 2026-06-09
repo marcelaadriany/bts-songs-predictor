@@ -124,7 +124,6 @@ export default function Login({ initialMode = "login" }: Props) {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                     required
                   />
-
                   <button
                     type="button"
                     className={styles.eyeButton}

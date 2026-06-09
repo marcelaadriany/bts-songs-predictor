@@ -26,14 +26,14 @@ export default function ConcertCard({
 
   function getStatusLabel() {
     if (isNextConcert) {
-      return "Next Show";
+      return "Próximo show";
     }
 
     if (concert.resultReleased) {
-      return "Completed";
+      return "Realizado";
     }
 
-    return "Upcoming";
+    return "Próximo show";
   }
 
   return (
@@ -48,7 +48,7 @@ export default function ConcertCard({
 
       <p className={styles.date}>{formatDate(concert.concertDate)}</p>
 
-      <span className={styles.action}>View details</span>
+      <span className={styles.action}>Ver músicas tocadas</span>
     </button>
   );
 }
