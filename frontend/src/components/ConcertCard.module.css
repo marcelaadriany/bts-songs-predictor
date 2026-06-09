@@ -1,56 +1,112 @@
 .card {
-  min-width: 220px;
-  padding: 18px;
-  border: 1px solid rgba(1, 0, 0, 0.14);
-  border-radius: 6px;
-  background: #f7f9fb;
-  color: #010000;
+  min-height: 230px;
+  padding: 28px 24px;
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111111;
   text-align: left;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .card:hover {
-  border-color: #c91530;
+  border-color: #e60012;
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.06);
   transform: translateY(-2px);
 }
 
 .selected {
-  border-color: #c91530;
-  box-shadow: 0 10px 24px rgba(201, 21, 48, 0.18);
+  border-color: #e60012;
 }
 
-.status {
+.nextStatus {
   display: inline-block;
-  margin-bottom: 14px;
-  padding: 4px 8px;
-  border-radius: 3px;
-  background: rgba(201, 21, 48, 0.12);
-  color: #c91530;
-  font-size: 0.68rem;
-  font-weight: 900;
+  margin-bottom: 18px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: rgba(230, 0, 18, 0.12);
+  color: #e60012;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pastStatus {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 26px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: #efefef;
+  color: #6b6b6b;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
 .name {
   margin: 0 0 14px;
-  color: #010000;
-  font-size: 1rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  color: #111111;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-transform: none;
 }
 
 .date {
-  margin: 0 0 22px;
-  color: #7b585d;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: #111111;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #e60012;
+
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.action {
-  color: #c91530;
-  font-size: 0.72rem;
-  font-weight: 900;
+.card {
+  flex: 0 0 240px;
+  width: 240px;
+  min-height: 220px;
+}
+.betButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  border: 1px solid #e60012;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #e60012;
+  text-decoration: none;
+
+  font-size: 0.8rem;
+  font-weight: 700;
   text-transform: uppercase;
+
+  transition: all 0.2s ease;
+}
+
+.betButton:hover {
+  background: #e60012;
+  color: #ffffff;
 }

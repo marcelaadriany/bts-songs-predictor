@@ -49,8 +49,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     username: string,
     email: string,
     password: string,
+    confirmPassword: string,
   ) {
-    await register({ username, email, password });
+    await register({
+      username,
+      email,
+      password,
+      confirmPassword,
+    });
   }
 
   function logout() {
