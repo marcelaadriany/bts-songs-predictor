@@ -1,11 +1,11 @@
 .row {
   display: flex;
   align-items: center;
-  gap: 9px;
-  color: #010000;
-  font-size: 0.88rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  gap: 8px;
+  color: #111111;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.25;
 }
 
 .clickable {
@@ -13,20 +13,35 @@
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
-  border: 1.8px solid #010000;
+  width: 11px;
+  height: 11px;
+  border: 1px solid #9ca3af;
+  border-radius: 2px;
   flex-shrink: 0;
+  background: #ffffff;
 }
 
 .selected {
-  background: #c91530;
+  border-color: #e60012;
+  background: #ffffff;
+  position: relative;
+}
+
+.selected::after {
+  content: "✓";
+  position: absolute;
+  top: -6px;
+  left: 1px;
+  color: #e60012;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .title {
-  color: #010000;
+  color: #111111;
 }
 
 .played {
-  color: #97182b;
+  color: #111111;
+  font-weight: 900;
 }

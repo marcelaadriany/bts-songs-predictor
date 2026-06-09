@@ -1,17 +1,17 @@
 .section {
   break-inside: avoid;
-  margin-bottom: 26px;
+  margin-bottom: 34px;
 }
 
 .title {
   display: inline-block;
-  margin: 0 0 10px;
-  padding: 6px 12px;
-  border-radius: 2px;
-  background: #c91530;
-  color: #f7f9fb;
-  font-size: 0.82rem;
-  font-weight: 900;
+  margin: 0 0 12px;
+  padding: 4px 10px;
+  background: #e60012;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
   text-transform: uppercase;
 }
 
