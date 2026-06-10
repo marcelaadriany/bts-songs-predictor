@@ -15,6 +15,7 @@ import {
 import type { Concert, ConcertResult } from "../types/concert";
 
 import styles from "./Home.module.css";
+import { Countdown } from "../components/Countdown";
 
 export default function Home() {
   const [concerts, setConcerts] = useState<Concert[]>([]);
@@ -130,31 +131,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className={styles.countdownBox}>
-            <div className={styles.countdownTitle}>Faltam</div>
-
-            <div className={styles.countdownNumbers}>
-              <div>
-                <strong>06</strong>
-                <span>Dias</span>
-              </div>
-
-              <div>
-                <strong>23</strong>
-                <span>Horas</span>
-              </div>
-
-              <div>
-                <strong>48</strong>
-                <span>Min</span>
-              </div>
-
-              <div>
-                <strong>19</strong>
-                <span>Seg</span>
-              </div>
-            </div>
-          </div>
+          {nextConcert && (
+            <>
+              <h3>{nextConcert.name}</h3>
+              <Countdown startsAtUtc={nextConcert.startsAtUtc} />
+            </>
+          )}
         </section>
 
         {isLoading && <p className={styles.status}>Carregando shows...</p>}
