@@ -47,7 +47,7 @@ public class BetService {
     User user = getAuthenticatedUser();
 
     Concert concert = concertRepository
-        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
+        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAscConcertTimeAsc(
             LocalDate.now())
         .orElseThrow(() -> new BadRequestException("Nenhum próximo show disponível para apostas."));
 
@@ -114,9 +114,12 @@ public class BetService {
     Concert concert = bet.getConcert();
 
     Concert nextConcert = concertRepository
-        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAsc(
-            LocalDate.now())
-        .orElseThrow(() -> new BadRequestException("Nenhum próximo show disponível para apostas."));
+        .findFirstByResultReleasedFalseAndConcertDateGreaterThanEqualOrderByConcertDateAscConcertTimeAsc(
+            LocalDate.now()
+        )
+        .orElseThrow(() ->
+            new BadRequestException("Nenhum próximo show disponível para apostas.")
+        );
 
     if (!concert.getId().equals(nextConcert.getId())) {
       throw new BadRequestException("Só é possível editar apostas do próximo show.");

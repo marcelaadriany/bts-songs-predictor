@@ -40,32 +40,32 @@ public class ConcertResultSeeder implements CommandLineRunner {
   }
 
   private void seedConcertResults() {
-    addConcertResult("GOYANG, KR", LocalDate.of(2026, 4, 9), "MIKROKOSMOS", "I NEED U");
-    addConcertResult("GOYANG, KR", LocalDate.of(2026, 4, 11), "DNA", "TAKE TWO");
-    addConcertResult("GOYANG, KR", LocalDate.of(2026, 4, 12), "RUN", "SPRING DAY");
+    addConcertResult("Goyang, dia 1", LocalDate.of(2026, 4, 9), "MIKROKOSMOS", "I NEED U");
+    addConcertResult("Goyang, dia 2", LocalDate.of(2026, 4, 11), "DNA", "TAKE TWO");
+    addConcertResult("Goyang, dia 3", LocalDate.of(2026, 4, 12), "RUN", "SPRING DAY");
 
-    addConcertResult("TÓQUIO, JP", LocalDate.of(2026, 4, 17), "SAVE ME", "CRYSTAL SNOW");
-    addConcertResult("TÓQUIO, JP", LocalDate.of(2026, 4, 18), "DOPE", "FOR YOU");
+    addConcertResult("Tóquio, dia 1", LocalDate.of(2026, 4, 17), "SAVE ME", "CRYSTAL SNOW");
+    addConcertResult("Tóquio, dia 2", LocalDate.of(2026, 4, 18), "DOPE", "FOR YOU");
 
-    addConcertResult("TAMPA, EUA", LocalDate.of(2026, 4, 25), "PERMISSION TO DANCE", "MAGIC SHOP");
-    addConcertResult("TAMPA, EUA", LocalDate.of(2026, 4, 26), "PIED PIPER", "BOY WITH LUV");
-    addConcertResult("TAMPA, EUA", LocalDate.of(2026, 4, 28), "SILVER SPOON (BAEPSAE)", "LIFE GOES ON");
+    addConcertResult("Tampa, dia 1", LocalDate.of(2026, 4, 25), "PERMISSION TO DANCE", "MAGIC SHOP");
+    addConcertResult("Tampa, dia 2", LocalDate.of(2026, 4, 26), "PIED PIPER", "BOY WITH LUV");
+    addConcertResult("Tampa, dia 3", LocalDate.of(2026, 4, 28), "SILVER SPOON (BAEPSAE)", "LIFE GOES ON");
 
-    addConcertResult("EL PASO, EUA", LocalDate.of(2026, 5, 2), "ON", "WINGS");
-    addConcertResult("EL PASO, EUA", LocalDate.of(2026, 5, 3), "DIONYSUS", "BEST OF ME");
+    addConcertResult("El Paso, dia 1", LocalDate.of(2026, 5, 2), "ON", "WINGS");
+    addConcertResult("El Paso, dia 2", LocalDate.of(2026, 5, 3), "DIONYSUS", "BEST OF ME");
 
-    addConcertResult("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 7), "SO WHAT", "BOY IN LUV");
-    addConcertResult("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 9), "WE ARE BULLETPROOF PT. 2", "JUST ONE DAY");
-    addConcertResult("CIDADE DO MÉXICO, MX", LocalDate.of(2026, 5, 10), "AIRPLANE PT. 2", "SPRING DAY");
+    addConcertResult("Cidade do México, dia 1", LocalDate.of(2026, 5, 7), "SO WHAT", "BOY IN LUV");
+    addConcertResult("Cidade do México, dia 2", LocalDate.of(2026, 5, 9), "WE ARE BULLETPROOF PT. 2", "JUST ONE DAY");
+    addConcertResult("Cidade do México, dia 3", LocalDate.of(2026, 5, 10), "AIRPLANE PT. 2", "SPRING DAY");
 
-    addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 16), "N.O", "ANPANMAN");
-    addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 17), "DOPE", "BLOOD SWEAT & TEARS");
-    addConcertResult("STANFORD, EUA", LocalDate.of(2026, 5, 19), "I NEED U", "NO MORE DREAM");
+    addConcertResult("Standford, dia 1", LocalDate.of(2026, 5, 16), "N.O", "ANPANMAN");
+    addConcertResult("Standford, dia 2", LocalDate.of(2026, 5, 17), "DOPE", "BLOOD SWEAT & TEARS");
+    addConcertResult("Standford, dia 3", LocalDate.of(2026, 5, 19), "I NEED U", "NO MORE DREAM");
 
-    addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 23), "PERMISSION TO DANCE", "GO GO");
-    addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 24), "BLACK SWAN", "SPINE BREAKER");
-    addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 27), "ANPANMAN", "ATTACK ON BANGTAN");
-    addConcertResult("LAS VEGAS, EUA", LocalDate.of(2026, 5, 28), "BOYZ WITH FUN", "DANGER");
+    addConcertResult("Las Vegas, dia 1", LocalDate.of(2026, 5, 23), "PERMISSION TO DANCE", "GO GO");
+    addConcertResult("Las Vegas, dia 2", LocalDate.of(2026, 5, 24), "BLACK SWAN", "SPINE BREAKER");
+    addConcertResult("Las Vegas, dia 3", LocalDate.of(2026, 5, 27), "ANPANMAN", "ATTACK ON BANGTAN");
+    addConcertResult("Las Vegas, dia 4", LocalDate.of(2026, 5, 28), "BOYZ WITH FUN", "DANGER");
 
   }
 
