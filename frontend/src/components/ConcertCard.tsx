@@ -1,9 +1,9 @@
 import type { Concert } from "../types/concert";
-
 import styles from "./ConcertCard.module.css";
 
 import { FiCalendar, FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useCountdown } from "../hooks/useCountdown";
 
 type Props = {
   concert: Concert;
@@ -21,20 +21,25 @@ export default function ConcertCard({
   const isPastConcert = concert.resultReleased;
   const isFutureConcert = !concert.resultReleased;
 
+  const { days, hours, minutes, seconds } = useCountdown(concert.startsAtUtc);
+
   function formatDate(date: string) {
     return new Date(date).toLocaleDateString("pt-BR", {
       day: "2-digit",
-      month: "short",
+      month: "long",
       year: "numeric",
       timeZone: "UTC",
     });
   }
 
+  function formatTime(value: number) {
+    return String(value).padStart(2, "0");
+  }
+
   return (
-    <button
+    <article
       className={`${styles.card} ${isSelected ? styles.selected : ""}`}
       onClick={() => onSelect(concert)}
-      type="button"
     >
       {!isPastConcert && (
         <span className={styles.nextStatus}>
@@ -52,20 +57,54 @@ export default function ConcertCard({
       {isPastConcert && <span className={styles.pastStatus}>Realizado</span>}
 
       {isFutureConcert ? (
-        <Link
-          to="/bet"
-          className={styles.betButton}
-          onClick={(event: React.MouseEvent<HTMLAnchorElement>) =>
-            event.stopPropagation()
-          }
-        >
-          Selecionar músicas
-        </Link>
+        <>
+          <div className={styles.countdownWrapper}>
+            <span className={styles.countdownLabel}>Faltam</span>
+
+            <div className={styles.countdown}>
+              <div className={styles.countdownItem}>
+                <strong>{formatTime(days)}</strong>
+                <span>Dias</span>
+              </div>
+
+              <span className={styles.separator}>:</span>
+
+              <div className={styles.countdownItem}>
+                <strong>{formatTime(hours)}</strong>
+                <span>Horas</span>
+              </div>
+
+              <span className={styles.separator}>:</span>
+
+              <div className={styles.countdownItem}>
+                <strong>{formatTime(minutes)}</strong>
+                <span>Min</span>
+              </div>
+
+              <span className={styles.separator}>:</span>
+
+              <div className={styles.countdownItem}>
+                <strong>{formatTime(seconds)}</strong>
+                <span>Seg</span>
+              </div>
+            </div>
+          </div>
+
+          <Link
+            to="/bet"
+            className={styles.betButton}
+            onClick={(event: React.MouseEvent<HTMLAnchorElement>) =>
+              event.stopPropagation()
+            }
+          >
+            Selecionar músicas
+          </Link>
+        </>
       ) : (
         <span className={styles.action}>
           Ver músicas tocadas <FiArrowRight />
         </span>
       )}
-    </button>
+    </article>
   );
 }

@@ -110,3 +110,49 @@
   background: #e60012;
   color: #ffffff;
 }
+
+.countdownWrapper {
+  margin-top: 1rem;
+}
+
+.countdownLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff1f3d;
+  text-transform: uppercase;
+}
+
+.countdown {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.countdownItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdownItem strong {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #ff1f3d;
+}
+
+.countdownItem span {
+  margin-top: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.separator {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #ff1f3d;
+}
