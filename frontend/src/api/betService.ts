@@ -12,8 +12,11 @@ export type BetSong = {
 
 export type MyBetResponse = {
   id: number;
+  concertId: number;
   username: string;
   concertName: string;
+  concertDate: string;
+  resultReleased: boolean;
   createdAt: string;
   songs: BetSong[];
 };

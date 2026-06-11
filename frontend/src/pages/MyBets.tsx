@@ -62,21 +62,24 @@ export default function MyBets() {
 
       await updateBet(betId, { songIds });
 
-      toast.success("Aposta atualizada com sucesso!");
+      const updatedSongs = albums
+        .flatMap((album) => album.songs)
+        .filter((song) => songIds.includes(song.id));
 
       setBets((currentBets) =>
         currentBets.map((bet) =>
           bet.id === betId
             ? {
                 ...bet,
-                songs: bet.songs.map((song) =>
-                  songIds.includes(song.id) ? song : song,
-                ),
+                songs: updatedSongs,
               }
             : bet,
         ),
       );
 
+      toast.success("Aposta atualizada com sucesso!");
+
+      setExpandedBetId(null);
       setExpandedBetId(null);
     } catch (error) {
       toast.error(
@@ -116,9 +119,9 @@ export default function MyBets() {
               <MyBetCard
                 key={bet.id}
                 bet={{
-                  concertId: bet.id,
+                  concertId: bet.concertId,
                   concertName: bet.concertName,
-                  concertDate: bet.createdAt,
+                  concertDate: bet.concertDate,
                   resultReleased: false,
                   selectedSongs: bet.songs,
                 }}
