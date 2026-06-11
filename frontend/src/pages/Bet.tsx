@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import Layout from "../components/Layout";
-import AlbumSection from "../components/AlbumSection";
+import BetForm from "../components/BetForm";
 
 import { getSongsGroupedByAlbum } from "../api/songService";
 import { createBet } from "../api/betService";
@@ -20,7 +20,6 @@ export default function Bet() {
 
   const [albums, setAlbums] = useState<AlbumWithSongs[]>([]);
   const [nextConcert, setNextConcert] = useState<Concert | null>(null);
-  const [selectedSongs, setSelectedSongs] = useState<number[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,29 +58,13 @@ export default function Bet() {
     });
   }
 
-  function handleSelect(songId: number) {
-    const alreadySelected = selectedSongs.includes(songId);
-
-    if (alreadySelected) {
-      setSelectedSongs(selectedSongs.filter((id) => id !== songId));
-      return;
-    }
-
-    if (selectedSongs.length >= 6) {
-      toast.error("Você já selecionou 6 músicas.");
-      return;
-    }
-
-    setSelectedSongs([...selectedSongs, songId]);
-  }
-
-  async function handleSubmitBet() {
+  async function handleCreateBet(songIds: number[]) {
     if (!isAuthenticated) {
       toast.error("Faça login para apostar.");
       return;
     }
 
-    if (selectedSongs.length !== 6) {
+    if (songIds.length !== 6) {
       toast.error("Você deve selecionar 6 músicas.");
       return;
     }
@@ -89,9 +72,7 @@ export default function Bet() {
     try {
       setIsSubmitting(true);
 
-      await createBet({
-        songIds: selectedSongs,
-      });
+      await createBet({ songIds });
 
       toast.success("Aposta enviada com sucesso!");
     } catch (error) {
@@ -152,50 +133,18 @@ export default function Bet() {
           </p>
         </section>
 
-        {/* <section className={styles.selectedBox}>
-          <h3>
-            Músicas selecionadas <span>({selectedSongs.length}/6)</span>
-          </h3>
-
-          <div className={styles.selectedSlots}>
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className={styles.slot}>
-                {selectedSongs[index] ? "✓" : "+"}
-              </div>
-            ))}
-          </div>
-        </section> */}
-
         {isLoading && <p className={styles.status}>Carregando músicas...</p>}
 
         {error && <p className={styles.error}>{error}</p>}
 
         {!isLoading && !error && (
-          <section className={styles.albumGrid}>
-            {albums.map((album) => (
-              <AlbumSection
-                key={album.id}
-                album={album}
-                clickable
-                selectedSongs={selectedSongs}
-                onSelect={handleSelect}
-                showCheckbox
-              />
-            ))}
-          </section>
+          <BetForm
+            albums={albums}
+            submitLabel="Enviar aposta"
+            isSubmitting={isSubmitting}
+            onSubmit={handleCreateBet}
+          />
         )}
-
-        <div className={styles.footer}>
-          <button
-            className={styles.submitButton}
-            onClick={handleSubmitBet}
-            disabled={isSubmitting}
-          >
-            {isSubmitting
-              ? "Enviando..."
-              : `Enviar (${selectedSongs.length}/6)`}
-          </button>
-        </div>
       </main>
     </Layout>
   );

@@ -1,0 +1,86 @@
+.form {
+  width: 100%;
+}
+
+.selectedBox {
+  margin-bottom: 32px;
+  padding: 22px 26px;
+  border: 1px solid #efefef;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.selectedBox h3 {
+  margin: 0 0 22px;
+  color: #111111;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.selectedBox h3 span {
+  color: #e60012;
+}
+
+.selectedSlots {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 34px;
+}
+
+.slot {
+  height: 112px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #9ca3af;
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.albumGrid {
+  columns: 5 180px;
+  column-gap: 40px;
+}
+
+.footer {
+  margin-top: 42px;
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton {
+  width: 280px;
+  padding: 18px 24px;
+  border: none;
+  border-radius: 4px;
+  background: #e60012;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.submitButton:hover {
+  background: #c91530;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .selectedSlots {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .albumGrid {
+    columns: 2 180px;
+  }
+}
