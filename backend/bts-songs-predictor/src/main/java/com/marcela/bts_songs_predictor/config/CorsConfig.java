@@ -18,7 +18,7 @@ public class CorsConfig {
 
     configuration.setAllowedOrigins(List.of(
         "http://localhost:5173",
-        "bts-songs-predictor-flt2cgftd-marcela-adriany-projects.vercel.app"
+        "https://bts-songs-predictor.vercel.app/"
     ));
 
     configuration.setAllowedMethods(List.of(
