@@ -1,0 +1,125 @@
+.page {
+  width: 100%;
+  min-height: calc(100vh - 50px);
+
+  padding: 48px 56px 64px;
+
+  background: #ffffff;
+  color: #111111;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 44px;
+  color: #e60012;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header {
+  margin-bottom: 42px;
+}
+
+.header h1 {
+  margin: 0 0 12px;
+
+  color: #111111;
+
+  font-size: 2.5rem;
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+}
+
+.header h2 {
+  margin: 0 0 16px;
+
+  color: #e60012;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.header p {
+  max-width: 700px;
+
+  color: #6b6b6b;
+
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  align-items: flex-start;
+}
+
+.editor {
+  position: relative;
+
+  margin-top: 32px;
+  padding: 32px;
+
+  border: 1px solid #efefef;
+  border-radius: 8px;
+
+  background: #ffffff;
+}
+
+.editor h2 {
+  margin: 0 0 12px;
+
+  color: #111111;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.editor p {
+  color: #6b6b6b;
+}
+
+.closeButton {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f3f4f6;
+
+  cursor: pointer;
+
+  color: #111111;
+  font-size: 1.2rem;
+}
+
+.closeButton:hover {
+  background: #e5e7eb;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 32px 24px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .editor {
+    padding: 24px;
+  }
+}

@@ -5,6 +5,8 @@ import ConcertCard from "../components/ConcertCard";
 
 import { useRef } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { FiCalendar } from "react-icons/fi";
 
 import {
   getConcerts,
@@ -79,26 +81,33 @@ export default function Home() {
     });
   }
 
+  function getCityFromConcertName(name: string) {
+    return name.split(",")[0].trim();
+  }
+
   function getVisibleConcerts() {
     if (!nextConcert) {
       return concerts;
     }
 
+    const nextCity = getCityFromConcertName(nextConcert.name);
+
     const nextCityConcerts = concerts
       .filter(
         (concert) =>
-          !concert.resultReleased && concert.name === nextConcert.name,
+          !concert.resultReleased &&
+          getCityFromConcertName(concert.name) === nextCity,
       )
       .sort(
         (a, b) =>
-          new Date(a.concertDate).getTime() - new Date(b.concertDate).getTime(),
+          new Date(a.startsAtUtc).getTime() - new Date(b.startsAtUtc).getTime(),
       );
 
     const pastConcerts = concerts
       .filter((concert) => concert.resultReleased)
       .sort(
         (a, b) =>
-          new Date(b.concertDate).getTime() - new Date(a.concertDate).getTime(),
+          new Date(b.startsAtUtc).getTime() - new Date(a.startsAtUtc).getTime(),
       );
 
     return [...nextCityConcerts, ...pastConcerts];
@@ -118,13 +127,15 @@ export default function Home() {
     });
   }
 
+  const selectedConcertIsFuture =
+    selectedConcert && !selectedConcert.resultReleased;
+
   return (
     <Layout>
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroText}>
             <h1>Quais serão as próximas músicas surpresa?</h1>
-
             <p>
               Faça suas apostas e tente acertar as 2 músicas surpresa de cada
               show.
@@ -132,10 +143,7 @@ export default function Home() {
           </div>
 
           {nextConcert && (
-            <>
-              <h3>{nextConcert.name}</h3>
-              <Countdown startsAtUtc={nextConcert.startsAtUtc} />
-            </>
+            <Countdown startsAtUtc={nextConcert.startsAtUtc} variant="hero" />
           )}
         </section>
 
@@ -176,9 +184,16 @@ export default function Home() {
                 <div className={styles.detailsInfo}>
                   <h2>{selectedConcert.name}</h2>
 
-                  <p>{formatFullDate(selectedConcert.concertDate)}</p>
+                  <div className={styles.detailsDate}>
+                    <FiCalendar />
+                    <span>{formatFullDate(selectedConcert.concertDate)}</span>
+                  </div>
 
-                  <span className={styles.detailsBadge}>
+                  <span
+                    className={`${styles.detailsBadge} ${
+                      selectedConcertIsFuture ? styles.nextBadge : ""
+                    }`}
+                  >
                     {selectedConcert.resultReleased
                       ? "Realizado"
                       : "Próximo show"}
@@ -186,20 +201,28 @@ export default function Home() {
                 </div>
 
                 <div className={styles.surpriseSongs}>
-                  <h3>Músicas surpresas</h3>
+                  {selectedConcertIsFuture ? (
+                    <Link to="/bet" className={styles.betButton}>
+                      Selecionar músicas
+                    </Link>
+                  ) : (
+                    <>
+                      <h3>Músicas surpresas</h3>
 
-                  {isLoadingResults && <p>Carregando resultados...</p>}
+                      {isLoadingResults && <p>Carregando resultados...</p>}
 
-                  {!isLoadingResults && concertResults.length > 0 && (
-                    <ol className={styles.resultList}>
-                      {concertResults.map((result) => (
-                        <li key={result.songId}>{result.songTitle}</li>
-                      ))}
-                    </ol>
-                  )}
+                      {!isLoadingResults && concertResults.length > 0 && (
+                        <ol className={styles.resultList}>
+                          {concertResults.map((result) => (
+                            <li key={result.songId}>{result.songTitle}</li>
+                          ))}
+                        </ol>
+                      )}
 
-                  {!isLoadingResults && concertResults.length === 0 && (
-                    <p>Aguardando resultado do show.</p>
+                      {!isLoadingResults && concertResults.length === 0 && (
+                        <p>Aguardando resultado do show.</p>
+                      )}
+                    </>
                   )}
                 </div>
               </section>

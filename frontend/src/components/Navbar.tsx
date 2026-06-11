@@ -46,7 +46,7 @@ export default function Navbar() {
             {isMenuOpen && (
               <div className={styles.dropdown}>
                 <Link
-                  to="/bet"
+                  to="/my-bets"
                   className={styles.dropdownItem}
                   onClick={() => setIsMenuOpen(false)}
                 >
