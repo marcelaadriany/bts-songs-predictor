@@ -45,7 +45,7 @@ export default function BetForm({
 
   return (
     <section className={styles.form}>
-      <div className={styles.selectedBox}>
+      {/* <div className={styles.selectedBox}>
         <h3>
           Músicas selecionadas <span>({selectedSongs.length}/6)</span>
         </h3>
@@ -57,7 +57,7 @@ export default function BetForm({
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className={styles.albumGrid}>
         {albums.map((album) => (

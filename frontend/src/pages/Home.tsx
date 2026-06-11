@@ -202,7 +202,10 @@ export default function Home() {
 
                 <div className={styles.surpriseSongs}>
                   {selectedConcertIsFuture ? (
-                    <Link to="/bet" className={styles.betButton}>
+                    <Link
+                      to={`/bet/${selectedConcert.id}`}
+                      className={styles.betButton}
+                    >
                       Selecionar músicas
                     </Link>
                   ) : (

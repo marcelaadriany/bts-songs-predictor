@@ -19,7 +19,7 @@ export default function AppRoutes() {
           path="/register"
           element={<Login key="register" initialMode="register" />}
         />
-        <Route path="/bet" element={<Bet />} />
+        <Route path="/bet/:concertId" element={<Bet />} />
         <Route path="/results" element={<Results />} />
         <Route path="/my-bets" element={<MyBets />} />
       </Routes>

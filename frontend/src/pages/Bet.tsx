@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import toast from "react-hot-toast";
 
 import Layout from "../components/Layout";
@@ -7,7 +9,7 @@ import BetForm from "../components/BetForm";
 
 import { getSongsGroupedByAlbum } from "../api/songService";
 import { createBet } from "../api/betService";
-import { getNextConcert } from "../api/concertService";
+import { getNextConcert, getConcertById } from "../api/concertService";
 import { useAuth } from "../contexts/useAuth";
 
 import type { AlbumWithSongs } from "../types/song";
@@ -15,8 +17,11 @@ import type { Concert } from "../types/concert";
 
 import styles from "./Bet.module.css";
 
+import { Countdown } from "../components/Countdown";
+
 export default function Bet() {
   const { isAuthenticated } = useAuth();
+  const { concertId } = useParams();
 
   const [albums, setAlbums] = useState<AlbumWithSongs[]>([]);
   const [nextConcert, setNextConcert] = useState<Concert | null>(null);
@@ -28,13 +33,13 @@ export default function Bet() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [albumsData, nextConcertData] = await Promise.all([
+        const [albumsData, concertData] = await Promise.all([
           getSongsGroupedByAlbum(),
-          getNextConcert(),
+          concertId ? getConcertById(Number(concertId)) : getNextConcert(),
         ]);
 
         setAlbums(albumsData);
-        setNextConcert(nextConcertData);
+        setNextConcert(concertData);
       } catch (error) {
         setError(
           error instanceof Error
@@ -47,7 +52,7 @@ export default function Bet() {
     }
 
     loadData();
-  }, []);
+  }, [concertId]);
 
   function formatDate(date: string) {
     return new Date(date).toLocaleDateString("pt-BR", {
@@ -104,23 +109,9 @@ export default function Bet() {
             )}
           </div>
 
-          <div className={styles.countdownBox}>
-            <span>Faltam</span>
-
-            <div className={styles.countdownNumbers}>
-              <strong>06</strong>
-              <strong>23</strong>
-              <strong>48</strong>
-              <strong>19</strong>
-            </div>
-
-            <div className={styles.countdownLabels}>
-              <span>Dias</span>
-              <span>Horas</span>
-              <span>Min</span>
-              <span>Seg</span>
-            </div>
-          </div>
+          {nextConcert && (
+            <Countdown startsAtUtc={nextConcert.startsAtUtc} variant="hero" />
+          )}
         </section>
 
         <section className={styles.intro}>
