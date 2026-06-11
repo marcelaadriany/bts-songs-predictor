@@ -161,8 +161,11 @@ public class BetService {
 
     return new BetResponseDTO(
         bet.getId(),
-        bet.getUser().getDisplayUsername(),
+        bet.getConcert().getId(),
+        bet.getUser().getUsername(),
         bet.getConcert().getName(),
+        bet.getConcert().getConcertDate(),
+        bet.getConcert().getResultReleased(),
         bet.getCreatedAt(),
         songs
     );
