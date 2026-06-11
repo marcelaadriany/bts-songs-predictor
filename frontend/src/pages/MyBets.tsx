@@ -12,6 +12,7 @@ import type { AlbumWithSongs } from "../types/song";
 import type { MyBetResponse } from "../api/betService";
 
 import styles from "./MyBets.module.css";
+import { Link } from "react-router-dom";
 
 export default function MyBets() {
   const [bets, setBets] = useState<MyBetResponse[]>([]);
@@ -103,6 +104,9 @@ export default function MyBets() {
   return (
     <Layout>
       <main className={styles.page}>
+        <Link to="/" className={styles.backLink}>
+          ← Voltar
+        </Link>
         <header className={styles.header}>
           <h1>Minhas Apostas</h1>
 
@@ -144,7 +148,7 @@ export default function MyBets() {
 
             <h2>Editar músicas para {expandedBet.concertName}</h2>
 
-            <p>Selecione exatamente 6 músicas da lista abaixo.</p>
+            <p>Selecione 6 músicas da lista abaixo.</p>
 
             {albums.length > 0 && (
               <BetForm

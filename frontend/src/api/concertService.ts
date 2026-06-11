@@ -14,3 +14,7 @@ export async function getConcertResults(
 ): Promise<ConcertResult[]> {
   return apiFetch<ConcertResult[]>(`/concerts/${concertId}/results`);
 }
+
+export async function getConcertById(concertId: number): Promise<Concert> {
+  return apiFetch<Concert>(`/concerts/${concertId}`);
+}
