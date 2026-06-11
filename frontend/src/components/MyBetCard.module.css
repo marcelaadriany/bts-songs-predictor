@@ -1,0 +1,123 @@
+.card {
+  width: 320px;
+  min-height: 520px;
+
+  padding: 22px;
+
+  border: 1px solid #e60012;
+  border-radius: 8px;
+
+  background: #ffffff;
+}
+
+.badge {
+  display: inline-block;
+
+  margin-bottom: 18px;
+  padding: 5px 10px;
+
+  border-radius: 4px;
+
+  background: rgba(230, 0, 18, 0.1);
+
+  color: #e60012;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 0 0 16px;
+
+  color: #111111;
+
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #111111;
+}
+
+.divider {
+  height: 1px;
+
+  margin: 22px 0;
+
+  background: #efefef;
+}
+
+.card h4 {
+  margin-bottom: 18px;
+
+  color: #e60012;
+
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.songList {
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.songList li {
+  margin-bottom: 12px;
+
+  color: #111111;
+  font-weight: 600;
+}
+
+.emptyState {
+  text-align: center;
+}
+
+.musicIcon {
+  margin-bottom: 16px;
+
+  font-size: 4rem;
+
+  color: #e60012;
+}
+
+.emptyState strong {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: #111111;
+}
+
+.emptyState p {
+  color: #6b6b6b;
+}
+
+.actionButton {
+  width: 100%;
+
+  margin-top: 24px;
+  padding: 14px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #e60012;
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 700;
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
