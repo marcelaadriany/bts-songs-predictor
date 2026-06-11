@@ -4,7 +4,7 @@ export type Concert = {
   concertDate: string;
   concertTime: string;
   timezone: string;
-  startsAtUtc: string;
+  startsAtUtc: string | null;
   resultReleased: boolean;
 };
 

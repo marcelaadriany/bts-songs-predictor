@@ -109,8 +109,10 @@ export default function Bet() {
             )}
           </div>
 
-          {nextConcert && (
+          {nextConcert?.startsAtUtc ? (
             <Countdown startsAtUtc={nextConcert.startsAtUtc} variant="hero" />
+          ) : (
+            <p className={styles.status}>Horário do show indisponível.</p>
           )}
         </section>
 
