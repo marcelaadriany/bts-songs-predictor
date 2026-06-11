@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Bet from "../pages/Bet";
 import Results from "../pages/Results";
+import MyBets from "../pages/MyBets";
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
         />
         <Route path="/bet" element={<Bet />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/my-bets" element={<MyBets />} />
       </Routes>
     </BrowserRouter>
   );
