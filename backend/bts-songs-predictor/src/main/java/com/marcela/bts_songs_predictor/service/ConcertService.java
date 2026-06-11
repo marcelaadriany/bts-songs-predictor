@@ -56,15 +56,7 @@ public class ConcertService {
     Concert concert = concertRepository.findById(concertId)
         .orElseThrow(() -> new IllegalArgumentException("Show não encontrado."));
 
-    return new ConcertResponseDTO(
-        concert.getId(),
-        concert.getName(),
-        concert.getConcertDate(),
-        concert.getConcertTime(),
-        concert.getTimezone(),
-        null,
-        concert.getResultReleased()
-    );
+    return toResponseDTO(concert);
   }
 
   private ConcertResponseDTO toResponseDTO(Concert concert) {
