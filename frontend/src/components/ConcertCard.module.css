@@ -1,12 +1,17 @@
 .card {
-  min-height: 230px;
-  padding: 28px 24px;
+  flex: 0 0 240px;
+  width: 240px;
+  min-height: 205px;
+  padding: 20px 22px;
+
   border: 1px solid #efefef;
   border-radius: 8px;
   background: #ffffff;
   color: #111111;
+
   text-align: left;
   cursor: pointer;
+
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
@@ -25,109 +30,73 @@
 
 .nextStatus {
   display: inline-block;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   padding: 5px 9px;
+
   border-radius: 4px;
   background: rgba(230, 0, 18, 0.12);
+
   color: #e60012;
   font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.pastStatus {
-  display: inline-block;
-  width: fit-content;
-  margin-bottom: 26px;
-  padding: 5px 9px;
-  border-radius: 4px;
-  background: #efefef;
-  color: #6b6b6b;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
 .name {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   color: #111111;
+
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.03em;
-  text-transform: none;
 }
 
 .date {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 22px;
+
+  margin-bottom: 20px;
+
   color: #111111;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
 }
 
-.action {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.pastStatus {
+  display: inline-block;
+  width: fit-content;
 
-  color: #e60012;
+  margin-bottom: 24px;
+  padding: 5px 9px;
 
-  font-size: 0.85rem;
+  border-radius: 4px;
+  background: #efefef;
+
+  color: #6b6b6b;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-}
-
-.card {
-  flex: 0 0 240px;
-  width: 240px;
-  min-height: 220px;
-}
-.betButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 10px 14px;
-
-  border: 1px solid #e60012;
-  border-radius: 6px;
-
-  background: transparent;
-
-  color: #e60012;
-  text-decoration: none;
-
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-
-  transition: all 0.2s ease;
-}
-
-.betButton:hover {
-  background: #e60012;
-  color: #ffffff;
 }
 
 .countdownWrapper {
-  margin-top: 1rem;
+  margin-top: 4px;
 }
 
 .countdownLabel {
   display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
+  margin-bottom: 8px;
+
   color: #ff1f3d;
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
 .countdown {
   display: flex;
   align-items: flex-start;
-  gap: 0.35rem;
+  gap: 5px;
 }
 
 .countdownItem {
@@ -137,22 +106,39 @@
 }
 
 .countdownItem strong {
-  font-size: 1.5rem;
-  line-height: 1;
   color: #ff1f3d;
+  font-size: 1.32rem;
+  line-height: 1;
+  font-weight: 800;
 }
 
 .countdownItem span {
-  margin-top: 0.35rem;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #555;
+  margin-top: 7px;
+
+  color: #333333;
+  font-size: 0.62rem;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
 .separator {
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1;
   color: #ff1f3d;
+  font-size: 1.32rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #e60012;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.future {
+  border-color: #e60012;
 }

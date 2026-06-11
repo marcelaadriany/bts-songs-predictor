@@ -7,27 +7,33 @@
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 48px;
+  display: flex;
   align-items: center;
-  padding: 32px 0 48px;
+  justify-content: space-between;
+  gap: 2rem;
+
+  padding: 1rem 0;
   border-bottom: 1px solid #efefef;
 }
 
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+
+  padding: 1rem 0;
+  border-bottom: 1px solid #efefef;
+}
 .heroText h1 {
-  margin: 0 0 16px;
-  color: #111111;
+  margin-bottom: 0.5rem;
   font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
 }
 
 .heroText p {
-  max-width: 620px;
-  color: #6b6b6b;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  margin: 0;
+  color: #555;
+  line-height: 1.4;
 }
 
 .countdownBox {
@@ -250,4 +256,52 @@
 
 .arrowRight {
   right: -20px;
+}
+
+.detailsDate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  color: #111111;
+  font-size: 1rem;
+}
+
+.detailsBadge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: #efefef;
+  color: #6b6b6b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.nextBadge {
+  background: rgba(230, 0, 18, 0.1);
+  color: #e60012;
+}
+
+.betButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 18px;
+  border: 1px solid #e60012;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #e60012;
+
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.betButton:hover {
+  background: #e60012;
+  color: #ffffff;
 }
