@@ -8,6 +8,16 @@
   color: #111111;
 }
 
+.backLink {
+  display: inline-block;
+  margin-bottom: 44px;
+  color: #e60012;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .header {
   margin-bottom: 42px;
 }
