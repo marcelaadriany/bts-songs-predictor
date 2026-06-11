@@ -49,6 +49,11 @@ public class ConcertController {
     return concertService.getNextConcert();
   }
 
+  @GetMapping("/{concertId}")
+  public ConcertResponseDTO getConcertById(@PathVariable Long concertId) {
+    return concertService.getConcertById(concertId);
+  }
+
   @GetMapping("/{concertId}/results")
   public List<ConcertResultResponseDTO> getResultsByConcert(
       @PathVariable Long concertId

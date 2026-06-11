@@ -52,6 +52,21 @@ public class ConcertService {
     return toResponseDTO(concert);
   }
 
+  public ConcertResponseDTO getConcertById(Long concertId) {
+    Concert concert = concertRepository.findById(concertId)
+        .orElseThrow(() -> new IllegalArgumentException("Show não encontrado."));
+
+    return new ConcertResponseDTO(
+        concert.getId(),
+        concert.getName(),
+        concert.getConcertDate(),
+        concert.getConcertTime(),
+        concert.getTimezone(),
+        null,
+        concert.getResultReleased()
+    );
+  }
+
   private ConcertResponseDTO toResponseDTO(Concert concert) {
     String startsAtUtc = ZonedDateTime.of(
         concert.getConcertDate(),
